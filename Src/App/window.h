@@ -1,7 +1,8 @@
 #pragma once
 #include <SDL.h>
 
-/*! A singleton window class, helps maintaining instance of an SDL window */
+/// Window class
+/** A singleton window class, helps maintaining instance of an SDL window */
 class Window {
 
     SDL_Window* sdlWindow = NULL;
