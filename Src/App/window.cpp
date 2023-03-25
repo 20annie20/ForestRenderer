@@ -21,7 +21,7 @@ Window& Window::GetInstance()
 * \param[in] width - width of the window (in pixels)
 * \param[in] height - height of the window (in pixels)
 */
-void Window::initWindow(const char* windowTitle, const int width, const int height)
+void Window::InitWindow(const char* windowTitle, const int width, const int height)
 {
 	this->width = width;
 	this->height = height;
@@ -33,13 +33,13 @@ void Window::initWindow(const char* windowTitle, const int width, const int heig
 	}
 }
 
-int Window::getWidth() const { return width; }
+int Window::GetWidth() const { return width; }
 
-int Window::getHeight() const {	return height; }
+int Window::GetHeight() const {	return height; }
 
-SDL_Window* Window::getSdlWindow() const { return sdlWindow; }
+SDL_Window* Window::GetSdlWindow() const { return sdlWindow; }
 
-void Window::destroyWindow()
+void Window::DestroyWindow()
 {
 	SDL_DestroyWindow(sdlWindow);
 }

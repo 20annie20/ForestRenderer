@@ -1,11 +1,11 @@
 #pragma once
 #include "Common.h"
 #include "AllocatorAlgorithm.h"
-
+#include <random>
 
 class RandomAllocator : public AllocatorAlgorithm
 {
-	void setTreeList(std::vector<Tree> treeList);
-	void setTerrain(Terrain terrain);
-	std::span<Point> allocate();
+	void SetTreeList(std::vector<Tree> treeList);
+	void SetTerrain(Terrain terrain);
+	std::span<Point> Allocate();
 };

@@ -23,6 +23,8 @@ public:
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap
 	void GenerateHeight();
-	std::span<Point> getPoints();
+	std::span<Point> GetPoints();
 	void SaveHeight(Heightmap); 
+	std::pair<int, int> GetMapSize(); 
+	Point GetHeight(Point p);
 };

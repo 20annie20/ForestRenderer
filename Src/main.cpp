@@ -16,7 +16,7 @@ const int SCREEN_HEIGHT = 600;
 */
 int main(int argc, char* args[])
 {
-	Window::GetInstance().initWindow("Forest Simulator", SCREEN_WIDTH, SCREEN_HEIGHT);
+	Window::GetInstance().InitWindow("Forest Simulator", SCREEN_WIDTH, SCREEN_HEIGHT);
 	Window &window = Window::GetInstance();
 
 	//Initialize SDL
@@ -30,18 +30,11 @@ int main(int argc, char* args[])
 		// init engine
 		Engine engine = Engine();
 
-		engine.run(AllocatorType::Random);
-
-		SDL_Surface* windowSurface = NULL;
-
-		//windowSurface = SDL_GetWindowSurface(window.getSdlWindow());
-		//SDL_BlitSurface(Loader::GetSurfaceFromBitmap("Resources/Heightmap_Rocky.bmp"), NULL, windowSurface, NULL);
-		//SDL_UpdateWindowSurface(window.getSdlWindow());
-
+		engine.Run(AllocatorType::Random);
 		SDL_Delay(3000);
 	}
 
-	window.destroyWindow();
+	window.DestroyWindow();
 
 	//Quit SDL subsystems
 	SDL_Quit();

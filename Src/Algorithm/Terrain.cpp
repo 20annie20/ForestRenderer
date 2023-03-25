@@ -22,7 +22,7 @@ void Terrain::GenerateHeight()
 	// perlin noise generation based on user input x, y
 }
 
-std::span<Point> Terrain::getPoints()
+std::span<Point> Terrain::GetPoints()
 {
 	Point tp;
 
@@ -53,4 +53,16 @@ std::span<Point> Terrain::getPoints()
 
 void Terrain::SaveHeight(Heightmap)
 {
+}
+
+std::pair<int, int> Terrain::GetMapSize()
+{
+	std::pair<int, int> pair = { heightmapDTO.GetSizeX(), heightmapDTO.GetSizeY() };
+	return pair;
+}
+
+Point Terrain::GetHeight(Point point)
+{
+	point.y = heightmapDTO.GetHeight(point.x, point.z);
+	return point;
 }

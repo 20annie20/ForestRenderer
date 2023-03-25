@@ -18,10 +18,10 @@ Engine::~Engine()
 	delete allocator;
 }
 
-void Engine::run(AllocatorType allocType)
+void Engine::Run(AllocatorType allocType)
 {
 	Point range = Point(255, 400, 255);
-	renderer->drawPoints(terrain.getPoints(), range);
+	renderer->DrawPoints(terrain.GetPoints(), range);
 	switch (allocType)
 	{
 		case Random:
@@ -32,13 +32,13 @@ void Engine::run(AllocatorType allocType)
 			break;
 	}
 	
-	allocator->setTerrain(terrain);
-	allocator->setTreeList(treeVector);
-	renderer->drawPoints(allocator->allocate(), range);
+	allocator->SetTerrain(terrain);
+	allocator->SetTreeList(treeVector);
+	renderer->DrawPoints(allocator->Allocate(), range);
 	
 	// renderer->Run(); // to show the animation
 }
 
-void Engine::cleanup()
+void Engine::Cleanup()
 {
 }

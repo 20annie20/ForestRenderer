@@ -17,10 +17,10 @@ public:
     void operator=(const Window&) = delete;
 
     static Window& GetInstance();
-    void initWindow(const char* windowTitle, const int width, const int height);
+    void InitWindow(const char* windowTitle, const int width, const int height);
 
-    int getWidth() const;
-    int getHeight() const;
-    SDL_Window* getSdlWindow() const;
-    void destroyWindow();
+    int GetWidth() const;
+    int GetHeight() const;
+    SDL_Window* GetSdlWindow() const;
+    void DestroyWindow();
 };

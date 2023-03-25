@@ -10,7 +10,8 @@ enum ColorType
 	Brown,
 	Orange,
 	Yellow,
-	Grey
+	Grey,
+	Green
 };
 
 struct Point {

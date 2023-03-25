@@ -19,6 +19,6 @@ public:
 	Engine();
 	~Engine();
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
-	void run(AllocatorType allocType);
-	void cleanup();
+	void Run(AllocatorType allocType);
+	void Cleanup();
 };

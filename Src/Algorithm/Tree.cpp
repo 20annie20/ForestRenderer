@@ -7,7 +7,13 @@ Tree::Tree(Species species)
 	this->y = 0;
 }
 
-void Tree::setLocation(int x, int y)
+void Tree::SetLocation(int x, int y)
 {
-	x = x; y = y;
+	this->x = x; this->y = y;
+}
+
+Point Tree::GetLocation()
+{
+	Point point = { x, y, 0, ColorType::Green };
+	return point;
 }
