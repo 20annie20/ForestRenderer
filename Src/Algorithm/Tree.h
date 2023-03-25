@@ -11,7 +11,7 @@ public:
 	};
 private:
 	Species species;
-	float x, y;
+	float x, z;
 	// branches tree struct
 	// rules definition
 
@@ -19,6 +19,6 @@ public:
 
 	Tree();
 	Tree(Species species);
-	void SetLocation(int x, int y);
+	void SetLocation(int x, int z);
 	Point GetLocation();
 };

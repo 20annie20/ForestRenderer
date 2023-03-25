@@ -4,16 +4,16 @@ Tree::Tree(Species species)
 {
 	this->species = species;
 	this->x = 0;
-	this->y = 0;
+	this->z = 0;
 }
 
-void Tree::SetLocation(int x, int y)
+void Tree::SetLocation(int x, int z)
 {
-	this->x = x; this->y = y;
+	this->x = x; this->z = z;
 }
 
 Point Tree::GetLocation()
 {
-	Point point = { x, y, 0, ColorType::Green };
+	Point point = { x, 0, z, ColorType::Green };
 	return point;
 }

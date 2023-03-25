@@ -9,6 +9,35 @@ Engine::Engine()
 	// 
 	// debug
 	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Pine));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
+	treeVector.push_back(Tree(Tree::Species::Oak));
 	treeVector.push_back(Tree(Tree::Species::Oak));
 }
 
@@ -34,8 +63,8 @@ void Engine::Run(AllocatorType allocType)
 	
 	allocator->SetTerrain(terrain);
 	allocator->SetTreeList(treeVector);
-	renderer->DrawPoints(allocator->Allocate(), range);
-	
+	std::span<Point> allocationPoints = allocator->Allocate();
+	renderer->DrawPoints(allocationPoints, range);
 	// renderer->Run(); // to show the animation
 }
 

@@ -16,10 +16,15 @@ void SDLRenderer::DrawPoints( std::span<Point> points, const Point& range )
     for( auto& point : points )
     {
         TransformPoint( point, outPoint, range );
-        SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );
         SetColor(point.color);
+        if(point.color == ColorType::Green)
+            SDL_RenderDrawLine(rend, outPoint.x, outPoint.y, outPoint.x, outPoint.y + 50);
+        else
+            SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );
+
+       
     }
-    SDL_RenderPresent( rend ); // todo render to a texture to not redraw this 
+    SDL_RenderPresent( rend );
 }
 
 void SDLRenderer::SetColor(const ColorType& color)
