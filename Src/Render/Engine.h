@@ -11,7 +11,6 @@ class Engine
 public:
 	Engine();
 	~Engine();
-	void Init();
 	void Run();
 	void Cleanup();
 private:

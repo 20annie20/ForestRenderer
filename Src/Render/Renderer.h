@@ -1,9 +1,11 @@
 #pragma once
+#include <span>
+#include <utility>
 
 class Renderer
 {
+
 public:
-	virtual void Init() = 0;
-	virtual void Run() = 0;
-	virtual void Cleanup() = 0;
+	virtual void drawPoints( std::span<struct Point> ) = 0;
+	virtual void drawEdges( std::span<std::pair<struct Point, struct Point>>) = 0;
 };

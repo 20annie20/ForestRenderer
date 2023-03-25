@@ -2,6 +2,7 @@
 #include "Common.h"
 #include "Utils\Loader.h"
 #include "App\Window.h"
+#include "Render\Engine.h"
 
 /** Screen dimension constants */
 const int SCREEN_WIDTH = 1280;
@@ -26,6 +27,10 @@ int main(int argc, char* args[])
 	{
 		// init window
 		// init engine
+		Engine engine = Engine();
+
+		engine.Run();
+
 		SDL_Surface* windowSurface = NULL;
 
 		windowSurface = SDL_GetWindowSurface(window.getSdlWindow());

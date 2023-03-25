@@ -1,10 +1,10 @@
 #include "Engine.h"
+#include "SDLRenderer.h"
 #include <filesystem>
 
-Engine::Engine() : renderer(nullptr)
+Engine::Engine()
 {
-	//renderer = new SDLEngine();
-	terrain = Terrain();
+	renderer = new SDLRenderer();
 }
 
 Engine::~Engine()
@@ -12,18 +12,12 @@ Engine::~Engine()
 	delete renderer;
 }
 
-void Engine::Init() // pass path to shader?
-{
-	std::filesystem::current_path(std::filesystem::current_path() / "../");
-	renderer->Init();
-}
-
 void Engine::Run()
 {
-	renderer->Run();
+	renderer->drawPoints(terrain.getPoints());
+	// renderer->Run(); // to show the animation
 }
 
 void Engine::Cleanup()
 {
-	renderer->Cleanup();
 }

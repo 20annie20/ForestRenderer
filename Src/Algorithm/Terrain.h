@@ -1,10 +1,20 @@
 #pragma once
 #include "Utils/Heightmap.h"
 #include "Utils/Loader.h"
+#include <span>
 #include "Common.h"
 
 class Terrain {
+	enum SoilType
+	{
+		Clay,
+		Mud,
+		Sand,
+		Stones
+	};
+
 	Heightmap heightmapDTO; // composed heightmap
+	std::vector<Point> terrainPoints;
 
 public:
 	Terrain();
@@ -12,6 +22,6 @@ public:
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap
 	void GenerateHeight();
+	std::span<Point> getPoints();
 	void SaveHeight(Heightmap); 
-	// ewentualnie jakieœ info o kolorze
 };
