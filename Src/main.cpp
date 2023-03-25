@@ -2,7 +2,6 @@
 #pragma once
 #include "Common.h"
 #include "Utils\Loader.h"
-#include "Utils\Timer.h"
 #include "App\Window.h"
 #include "Render\Engine.h"
 
@@ -19,8 +18,6 @@ int main(int argc, char* args[])
 {
 	Window::GetInstance().InitWindow("Forest Simulator", SCREEN_WIDTH, SCREEN_HEIGHT);
 	Window &window = Window::GetInstance();
-	Timer timer;
-	SDL_Event event;
 
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -30,17 +27,6 @@ int main(int argc, char* args[])
 	{
 		Engine engine = Engine();
 		engine.Run(AllocatorType::Random);
-		bool doQuit = false;
-		while(!doQuit)
-		{
-			while (SDL_PollEvent(&event)) {
-				if (event.type == SDL_QUIT || (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE))
-					doQuit = true;
-					break;
-			}
-			const auto ms = timer.Mark();
-			
-		}
 	}
 
 	window.DestroyWindow();

@@ -65,7 +65,18 @@ void Engine::Run(AllocatorType allocType)
 	allocator->SetTreeList(treeVector);
 	std::span<Point> allocationPoints = allocator->Allocate();
 	renderer->DrawPoints(allocationPoints, range);
-	// renderer->Run(); // to show the animation
+	bool doQuit = false;
+
+	while (!doQuit)
+	{
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT || (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE))
+				doQuit = true;
+			break;
+		}
+		//doFrame
+		const auto ms = timer.Mark();
+	}
 }
 
 void Engine::Cleanup()

@@ -7,6 +7,7 @@
 #include "Algorithm\RandomAllocator.h"
 #include "Algorithm\Tree.h"
 #include <filesystem>
+#include "Utils\Timer.h"
 
 class Engine
 {
@@ -14,6 +15,8 @@ class Engine
 	Renderer* renderer;
 	AllocatorAlgorithm* allocator;
 	std::vector<Tree> treeVector;
+	Timer timer;
+	SDL_Event event;
 
 public:
 	Engine();
