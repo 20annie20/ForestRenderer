@@ -1,18 +1,24 @@
 #pragma once
 
 #include "Renderer.h"
+#include "SDLRenderer.h"
 #include "Algorithm\Terrain.h"
-
-class Renderer;
+#include "Algorithm\AllocatorAlgorithm.h"
+#include "Algorithm\RandomAllocator.h"
+#include "Algorithm\Tree.h"
+#include <filesystem>
 
 class Engine
 {
 	Terrain terrain;
+	Renderer* renderer;
+	AllocatorAlgorithm* allocator;
+	std::vector<Tree> treeVector;
+
 public:
 	Engine();
 	~Engine();
-	void Run();
-	void Cleanup();
-private:
-	Renderer* renderer;
+	//user input will be returning AllocatorType to choose from which allocator call the placement method
+	void run(AllocatorType allocType);
+	void cleanup();
 };

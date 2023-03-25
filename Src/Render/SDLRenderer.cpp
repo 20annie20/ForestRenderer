@@ -39,7 +39,7 @@ void SDLRenderer::drawPoints( std::span<Point> points, const Point& range )
         SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );
         setColor(point.color);
     }
-    SDL_RenderPresent( rend );
+    SDL_RenderPresent( rend ); // todo render to a texture to not redraw this 
 }
 
 void SDLRenderer::setColor(const ColorType& color)

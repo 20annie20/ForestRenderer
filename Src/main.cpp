@@ -1,4 +1,5 @@
 ﻿//Using SDL and standard IO
+#pragma once
 #include "Common.h"
 #include "Utils\Loader.h"
 #include "App\Window.h"
@@ -29,7 +30,7 @@ int main(int argc, char* args[])
 		// init engine
 		Engine engine = Engine();
 
-		engine.Run();
+		engine.run(AllocatorType::Random);
 
 		SDL_Surface* windowSurface = NULL;
 
