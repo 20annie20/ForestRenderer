@@ -1,9 +1,7 @@
 ﻿//Using SDL and standard IO
-#define SDL_MAIN_HANDLED
-#include <SDL.h>
-#include <stdio.h>
-#include <iostream>
-#include "App\window.h"
+#include "Common.h"
+#include "Utils\Loader.h"
+#include "App\Window.h"
 
 /** Screen dimension constants */
 const int SCREEN_WIDTH = 1280;
@@ -26,15 +24,12 @@ int main(int argc, char* args[])
 	}
 	else
 	{
-		SDL_Surface* image = SDL_LoadBMP("Resources/Heightmap_Rocky.bmp"); // add error loading if null
-		if (image == NULL)
-		{
-			throw std::invalid_argument("Heightmap not found");
-		}
+		// init window
+		// init engine
 		SDL_Surface* windowSurface = NULL;
 
 		windowSurface = SDL_GetWindowSurface(window.getSdlWindow());
-		SDL_BlitSurface(image, NULL, windowSurface, NULL);
+		SDL_BlitSurface(Loader::GetSurfaceFromBitmap("Resources/Heightmap_Rocky.bmp"), NULL, windowSurface, NULL);
 		SDL_UpdateWindowSurface(window.getSdlWindow());
 
 		SDL_Delay(6000);
