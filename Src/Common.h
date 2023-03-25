@@ -7,8 +7,8 @@
 
 enum ColorType
 {
-	Orange,
 	Brown,
+	Orange,
 	Yellow,
 	Grey
 };

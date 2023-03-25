@@ -33,11 +33,11 @@ int main(int argc, char* args[])
 
 		SDL_Surface* windowSurface = NULL;
 
-		windowSurface = SDL_GetWindowSurface(window.getSdlWindow());
-		SDL_BlitSurface(Loader::GetSurfaceFromBitmap("Resources/Heightmap_Rocky.bmp"), NULL, windowSurface, NULL);
-		SDL_UpdateWindowSurface(window.getSdlWindow());
+		//windowSurface = SDL_GetWindowSurface(window.getSdlWindow());
+		//SDL_BlitSurface(Loader::GetSurfaceFromBitmap("Resources/Heightmap_Rocky.bmp"), NULL, windowSurface, NULL);
+		//SDL_UpdateWindowSurface(window.getSdlWindow());
 
-		SDL_Delay(6000);
+		SDL_Delay(3000);
 	}
 
 	window.destroyWindow();

@@ -32,9 +32,17 @@ std::span<Point> Terrain::getPoints()
 		{
 			tp = Point();
 			tp.x = float(i);
-			tp.y = float(j);
-			tp.z = heightmapDTO.GetHeight(i, j);
-			tp.color = (ColorType) SoilType::Clay;
+			tp.y = heightmapDTO.GetHeight(i, j);
+			tp.z = float(j);
+			if (tp.y < 160.0)
+				tp.color = (ColorType) SoilType::Stones;
+			else if (tp.y < 180.0)
+				tp.color = (ColorType) SoilType::Sand;
+			else if (tp.y < 200.0)
+				tp.color = (ColorType) SoilType::Clay;
+			else
+				tp.color = (ColorType) SoilType::Mud;
+			
 			terrainPoints.push_back(tp);
 		}
 	}

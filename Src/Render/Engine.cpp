@@ -14,7 +14,9 @@ Engine::~Engine()
 
 void Engine::Run()
 {
-	renderer->drawPoints(terrain.getPoints());
+	Point range = Point(255, 400, 255);
+	renderer->drawPoints(terrain.getPoints(), range);
+
 	// renderer->Run(); // to show the animation
 }
 

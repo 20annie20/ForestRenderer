@@ -6,7 +6,7 @@ Heightmap::Heightmap(int x, int y)
 	sizeX = x;
 	sizeY = y;
 	try {
-		map.mapBuffer = new float(sizeX * sizeY);
+		map.mapBuffer = new uint8_t[sizeX * sizeY];
 	}
 	catch (const std::bad_alloc& e) {
 		std::cerr << "Allocation failed: " << e.what() << '\n';

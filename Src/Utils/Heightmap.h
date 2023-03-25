@@ -8,7 +8,7 @@ private:
 
 	union mapBuffer
 	{
-		float* mapBuffer;
+		uint8_t* mapBuffer;
 		void* pixels;
 	};
 

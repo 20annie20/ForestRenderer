@@ -2,13 +2,14 @@
 #include "Utils/Heightmap.h"
 #include "Utils/Loader.h"
 #include <span>
+#include <vector>
 #include "Common.h"
 
 class Terrain {
 	enum SoilType
 	{
-		Clay,
 		Mud,
+		Clay,
 		Sand,
 		Stones
 	};
