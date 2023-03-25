@@ -14,5 +14,5 @@ class SDLRenderer : public Renderer
 
 public:	
 	void DrawPoints( std::span<Point>, const Point& range);
-	void DrawEdges( std::span<std::pair<Point, Point>> );
+	void DrawEdges( std::span<std::pair<Point, Point>>, const Point& range);
 };

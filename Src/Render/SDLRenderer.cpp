@@ -2,9 +2,9 @@
 
 void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range)
 {
-    Point e(0, 100, 255);
-    int x = (window.GetWidth() / range.x) * in.x;
-    int y = (range.y / window.GetHeight()) * in.y;
+    Point e(window.GetWidth() / 4, 100, 450);
+    int x = (window.GetWidth() / 513) * in.x - e.x;
+    int y = (window.GetHeight() - 2 * e.y ) / 513  * in.y - e.y;
     out.x = (e.z / in.z) * x + e.x;
     out.y = ((e.z / in.z) * y + e.y);
 }
@@ -17,10 +17,7 @@ void SDLRenderer::DrawPoints( std::span<Point> points, const Point& range )
     {
         TransformPoint( point, outPoint, range );
         SetColor(point.color);
-        if(point.color == ColorType::Green)
-            SDL_RenderDrawLine(rend, outPoint.x, outPoint.y, outPoint.x, outPoint.y + 50);
-        else
-            SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );       
+        SDL_RenderDrawPoint(rend, outPoint.x, outPoint.y);
     }
     SDL_RenderPresent( rend );
 }
@@ -49,6 +46,17 @@ void SDLRenderer::SetColor(const ColorType& color)
     }
 }
 
-void SDLRenderer::DrawEdges(std::span<std::pair<Point, Point>> edges)
+void SDLRenderer::DrawEdges(std::span<std::pair<Point, Point>> edges, const Point& range)
 {
+    Point outPoint1 = Point();
+    Point outPoint2 = Point();
+
+    for (auto& edge : edges)
+    {
+        TransformPoint(edge.first, outPoint1, range);
+        TransformPoint(edge.second, outPoint2, range);
+        SetColor(edge.first.color);
+        SDL_RenderDrawLine(rend, outPoint1.x, outPoint1.y, outPoint2.x, outPoint2.y);
+    }
+    SDL_RenderPresent(rend);
 }

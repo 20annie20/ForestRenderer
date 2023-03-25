@@ -12,7 +12,7 @@ enum AllocatorType
 class AllocatorAlgorithm
 {
 protected:
-	std::vector<Tree> treeList; // reference to objects needed to generate placements
+	std::vector<Tree> treeList;
 	Terrain terrain;
 	std::vector<Point> allocationPoints;
 

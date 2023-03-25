@@ -8,12 +8,14 @@
 #include "Algorithm\Tree.h"
 #include <filesystem>
 #include "Utils\Timer.h"
+#include "Algorithm\GrowthSimulator.h"
 
 class Engine
 {
 	Terrain terrain;
 	Renderer* renderer;
 	AllocatorAlgorithm* allocator;
+	GrowthSimulator simulator;
 	std::vector<Tree> treeVector;
 	Timer timer;
 	SDL_Event event;

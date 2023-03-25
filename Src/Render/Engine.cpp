@@ -5,6 +5,7 @@ Engine::Engine()
 {
 	renderer = new SDLRenderer();
 	allocator = new RandomAllocator();
+	
 	// input Observer?
 	// 
 	// debug
@@ -39,6 +40,8 @@ Engine::Engine()
 	treeVector.push_back(Tree(Tree::Species::Oak));
 	treeVector.push_back(Tree(Tree::Species::Oak));
 	treeVector.push_back(Tree(Tree::Species::Oak));
+
+	simulator = GrowthSimulator(treeVector, terrain);
 }
 
 Engine::~Engine()
@@ -64,7 +67,6 @@ void Engine::Run(AllocatorType allocType)
 	allocator->SetTerrain(terrain);
 	allocator->SetTreeList(treeVector);
 	std::span<Point> allocationPoints = allocator->Allocate();
-	renderer->DrawPoints(allocationPoints, range);
 	bool doQuit = false;
 
 	while (!doQuit)
@@ -74,7 +76,8 @@ void Engine::Run(AllocatorType allocType)
 				doQuit = true;
 			break;
 		}
-		//doFrame
+		std::span<std::pair<Point, Point>> Lines = simulator.Grow();
+		renderer->DrawEdges(Lines, range);
 		const auto ms = timer.Mark();
 	}
 }
