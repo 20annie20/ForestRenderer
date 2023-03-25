@@ -2,6 +2,7 @@
 #pragma once
 #include "Common.h"
 #include "Utils\Loader.h"
+#include "Utils\Timer.h"
 #include "App\Window.h"
 #include "Render\Engine.h"
 
@@ -18,25 +19,32 @@ int main(int argc, char* args[])
 {
 	Window::GetInstance().InitWindow("Forest Simulator", SCREEN_WIDTH, SCREEN_HEIGHT);
 	Window &window = Window::GetInstance();
+	Timer timer;
+	SDL_Event event;
 
-	//Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
 	}
 	else
 	{
-		// init window
-		// init engine
 		Engine engine = Engine();
-
 		engine.Run(AllocatorType::Random);
-		SDL_Delay(3000);
+		bool doQuit = false;
+		while(!doQuit)
+		{
+			while (SDL_PollEvent(&event)) {
+				if (event.type == SDL_QUIT || (event.type == SDL_WINDOWEVENT && event.window.event == SDL_WINDOWEVENT_CLOSE))
+					doQuit = true;
+					break;
+			}
+			const auto ms = timer.Mark();
+			
+		}
 	}
 
 	window.DestroyWindow();
 
-	//Quit SDL subsystems
 	SDL_Quit();
 
 	return 0;

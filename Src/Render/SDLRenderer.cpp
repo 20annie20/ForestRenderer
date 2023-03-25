@@ -20,9 +20,7 @@ void SDLRenderer::DrawPoints( std::span<Point> points, const Point& range )
         if(point.color == ColorType::Green)
             SDL_RenderDrawLine(rend, outPoint.x, outPoint.y, outPoint.x, outPoint.y + 50);
         else
-            SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );
-
-       
+            SDL_RenderDrawPoint( rend, outPoint.x, outPoint.y );       
     }
     SDL_RenderPresent( rend );
 }
