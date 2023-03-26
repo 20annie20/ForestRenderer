@@ -1,15 +1,20 @@
 ﻿#include "Tree.h"
 
+SpeciesTable st = SpeciesTable();
+
 Tree::Tree(Species_ID species)
 {
 	this->species = species;
-	this->beginning = Point(0, 0, 0);
-	SpeciesTable st = SpeciesTable();
-	SpeciesEntry& tableEntry = st.at(species);
+	this->td.beginning = Point(0, 0, 0);
+	SpeciesEntry tableEntry = st.at(species);
 	if (tableEntry.id == species)
 	{
-		this->branchLength = tableEntry.branchLength;
-		this->rules = tableEntry.rules;
+		this->td.stackDepth = tableEntry.stackDepth;
+		this->td.branchLength = tableEntry.branchLength;
+		this->td.axioms = tableEntry.axioms;
+		this->td.angleSplit = tableEntry.angle;
+		this->stacks.rules = tableEntry.rules;
+		this->stacks.startingAngles.push_back(Point(0.0f, 1.0f, 0.0f));
 	}
 	else
 		throw std::domain_error("Tree species doesn't match the table entry.");
@@ -17,25 +22,34 @@ Tree::Tree(Species_ID species)
 
 void Tree::SetLocation(int x, int z)
 {
-	this->beginning.x = x; this->beginning.z = z;
+	this->td.beginning.x = x; this->td.beginning.z = z;
 }
 
 void Tree::SetLocation(Point p)
 {
-	this->beginning = p;
+	this->td.beginning = p;
+	this->stacks.startingPoints.push_back(td.beginning);
 }
 
 Point Tree::GetLocation()
 {
-	Point point = { beginning.x, 0, beginning.z, ColorType::Green };
-	return point;
+	return td.beginning;
 }
 
 std::vector<std::pair<Point, Point>> Tree::Grow()
 {
-	for (auto& rule : rules)
+	branches.clear();
+	td.branchLength *= 0.995;
+	td.angleSplit.x *= 1.005;
+	td.angleSplit.y *= 1.005;
+	td.angleSplit.z *= 1.005;
+
+	if (!stacks.rules.empty())
 	{
+		IRule* rule = stacks.rules.back();
+		stacks.rules.pop_back();
 		ApplyRule(rule);
 	}
+	
 	return branches;
 }

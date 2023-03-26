@@ -2,6 +2,7 @@
 #include "Render\Renderer.h"
 #include "App\Window.h"
 #include "Common.h"
+#include <vector>
 
 class SDLRenderer : public Renderer
 {
@@ -13,6 +14,6 @@ class SDLRenderer : public Renderer
 	void SetColor(const ColorType& color);
 
 public:	
-	void DrawPoints( std::span<Point>, const Point& range);
-	void DrawEdges( std::span<std::pair<Point, Point>>, const Point& range);
+	void DrawPoints( std::vector<ColoredPoint>, const Point& range);
+	void DrawEdges( std::vector<std::pair<ColoredPoint, ColoredPoint>>, const Point& range);
 };

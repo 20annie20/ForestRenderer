@@ -14,5 +14,5 @@ protected:
 public:
 	GrowthSimulator() = default;
 	GrowthSimulator(std::vector<Tree> treeList, Terrain terrain);
-	std::span<std::pair<Point, Point>> Grow();
+	std::vector<std::pair<Point, Point>> Grow();
 };

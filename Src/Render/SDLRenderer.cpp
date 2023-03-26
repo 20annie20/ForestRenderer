@@ -2,21 +2,27 @@
 
 void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range)
 {
-    Point e(window.GetWidth() / 4, 100, 450);
+    Point e(window.GetWidth() / 4, 150, 450);
     int x = (window.GetWidth() / 513) * in.x - e.x;
     int y = (window.GetHeight() - 2 * e.y ) / 513  * in.y - e.y;
     out.x = (e.z / in.z) * x + e.x;
-    out.y = ((e.z / in.z) * y + e.y);
+    out.y = ((e.z / in.z) * (-y) + e.y);
 }
 
-void SDLRenderer::DrawPoints( std::span<Point> points, const Point& range )
+void SDLRenderer::DrawPoints( std::vector<ColoredPoint> points, const Point& range )
 {
-    Point outPoint = Point();
+    ColoredPoint outPoint = ColoredPoint();
     
     for( auto& point : points )
     {
         TransformPoint( point, outPoint, range );
         SetColor(point.color);
+
+        if (point.color == ColorType::Green)
+            SDL_RenderDrawLine(rend, outPoint.x, outPoint.y, outPoint.x, outPoint.y - 50);
+        else
+            SDL_RenderDrawPoint(rend, outPoint.x, outPoint.y);
+
         SDL_RenderDrawPoint(rend, outPoint.x, outPoint.y);
     }
     SDL_RenderPresent( rend );
@@ -46,10 +52,10 @@ void SDLRenderer::SetColor(const ColorType& color)
     }
 }
 
-void SDLRenderer::DrawEdges(std::span<std::pair<Point, Point>> edges, const Point& range)
+void SDLRenderer::DrawEdges(std::vector<std::pair<ColoredPoint, ColoredPoint>> edges, const Point& range)
 {
-    Point outPoint1 = Point();
-    Point outPoint2 = Point();
+    ColoredPoint outPoint1 = ColoredPoint();
+    ColoredPoint outPoint2 = ColoredPoint();
 
     for (auto& edge : edges)
     {

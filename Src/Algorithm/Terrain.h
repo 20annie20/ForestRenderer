@@ -15,7 +15,6 @@ class Terrain {
 	};
 
 	Heightmap heightmapDTO; // composed heightmap
-	std::vector<Point> terrainPoints;
 
 public:
 	Terrain();
@@ -23,8 +22,27 @@ public:
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap
 	void GenerateHeight();
-	std::span<Point> GetPoints();
 	void SaveHeight(Heightmap); 
 	std::pair<int, int> GetMapSize(); 
-	Point GetHeight(Point p);
+	int GetHeight(int i, int j);
+
+	template <typename T>
+	std::vector<T> GetPoints();
 };
+
+template <typename T>
+std::vector<T> Terrain::GetPoints()
+{
+	std::vector<T> points;
+	points.reserve(heightmapDTO.GetSizeX() * heightmapDTO.GetSizeY());
+
+	for (int i = 0; i < heightmapDTO.GetSizeX(); i++)
+	{
+		for (int j = 0; j < heightmapDTO.GetSizeY(); j++)
+		{
+			points.emplace_back(i, heightmapDTO.GetHeight(i,j), j);
+		}
+	}
+
+	return points;
+}

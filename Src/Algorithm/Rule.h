@@ -1,30 +1,25 @@
 #pragma once
 #include "Common.h"
 
+class Tree;
+
 struct IRule {
-	virtual void apply() = 0;
+	virtual void apply(Tree& tree) = 0;
+	static Point Move(Point start, Point angle, float distance);
 };
 
-struct RuleRotateR : public IRule {
-	void apply();
-};
-
-struct RuleRotateL : public IRule {
-	void apply();
+struct RuleSplit : public IRule {
+	void apply(Tree& tree);
 };
 
 struct RuleBranch : public IRule {
-	void apply();
-};
-
-struct RulePush : public IRule {
-	void apply();
-};
-
-struct RulePop : public IRule {
-	void apply();
+	void apply(Tree& tree);
 };
 
 struct RuleLeaf : public IRule {
-	void apply();
+	void apply(Tree& tree);
+};
+
+struct RuleReplace : public IRule {
+	void apply(Tree& tree);
 };

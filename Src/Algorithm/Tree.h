@@ -3,16 +3,34 @@
 #include "Rule.h"
 #include "SpeciesTable.h"
 #include <span>
+#include <deque>
 
 class Tree {
 
-private:
-	Species_ID species;
-	Point beginning;
-	float branchLength;
-	std::vector<IRule*> rules;
-	std::vector<std::pair<Point, Point>> branches;
+public:
+	struct TreeData
+	{
+		Point beginning;
+		int stackDepth;
+		float branchLength;
+		Point angleSplit;
+		std::vector<std::string> axioms;
+	};
 
+	struct TreeStacks
+	{
+		std::deque<IRule*> rules;		  // running rules stack ( replacements happen so vector not queue)
+		std::deque<Point> startingPoints; // starting points stack
+		std::deque<Point> startingAngles; // starting angles stack
+	};
+	// TODO add getters and setters and make private
+	Species_ID species;
+	TreeData td;
+	TreeStacks stacks;	
+
+	std::vector<std::pair<Point, Point>> branches; // these are current branches to draw
+
+private:
 	template <typename T>
 	void ApplyRule(T& Rule);
 
@@ -23,11 +41,15 @@ public:
 	void SetLocation(int x, int z);
 	void SetLocation(Point p);
 	Point GetLocation();
+
+
 	std::vector<std::pair<Point, Point>> Grow();
+
+	inline void ApplyRule(IRule* Rule)
+	{
+		Rule->apply(*this);
+	}
+
 };
 
-template<typename T>
-inline void Tree::ApplyRule(T& Rule)
-{
-	Rule->apply(); //aplly(this)
-}
+

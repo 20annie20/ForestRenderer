@@ -25,7 +25,7 @@ void RandomAllocator::SetTerrain(Terrain terrain)
 
 		t.SetLocation(distrX(generator), distrY(generator));
 		Point p = t.GetLocation();
-		p = terrain.GetHeight(p);
+		p.y = terrain.GetHeight(p.x, p.z);
 		t.SetLocation(p);
 	}
 }
