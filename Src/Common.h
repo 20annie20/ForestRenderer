@@ -11,7 +11,9 @@ enum ColorType
 	Orange,
 	Yellow,
 	Grey,
-	Green
+	Green,
+	DarkGreen,
+	Purple
 };
 
 // TODO move to point file and include 

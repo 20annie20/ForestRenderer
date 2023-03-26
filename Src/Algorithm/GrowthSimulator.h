@@ -10,9 +10,9 @@ class GrowthSimulator
 protected:
 	std::vector<Tree> treeList;
 	Terrain terrain;
-	std::vector<std::pair<Point, Point>> ve;
+	std::vector<std::pair<ColoredPoint, ColoredPoint>> ve;
 public:
 	GrowthSimulator() = default;
 	GrowthSimulator(std::vector<Tree> treeList, Terrain terrain);
-	std::vector<std::pair<Point, Point>> Grow();
+	std::vector<std::pair<ColoredPoint, ColoredPoint>> Grow();
 };

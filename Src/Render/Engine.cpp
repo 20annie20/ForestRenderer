@@ -59,17 +59,10 @@ void Engine::Run(AllocatorType allocType)
 		}
 		while (iterations++ != MAX_TICKS) {
 			//while not stop event
-			std::vector<std::pair<Point, Point>> Lines = simulator.Grow();
+			std::vector<std::pair<ColoredPoint, ColoredPoint>> Lines = simulator.Grow();
 
-			std::vector<std::pair<ColoredPoint, ColoredPoint>> ColoredLines(Lines.size());
-			std::transform(Lines.begin(), Lines.end(), ColoredLines.begin(),
-				[](std::pair<Point, Point> pair) {
-					return std::pair(
-						ColoredPoint(pair.first.x, pair.first.y, pair.first.z, Green),
-						ColoredPoint(pair.second.x, pair.second.y, pair.second.z, Green));
-				});
 
-			renderer->DrawEdges(ColoredLines, range);
+			renderer->DrawEdges(Lines, range);
 			const auto ms = timer.Mark(); // ms counter to display
 		}
 	}

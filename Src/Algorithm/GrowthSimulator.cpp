@@ -1,20 +1,38 @@
 ﻿#pragma once
 #include "GrowthSimulator.h"
 
+ColorType pickColor(Tree& tree)
+{
+	switch (tree.species) {
+	case MAPLE:
+		return Purple;
+	case PINE:
+		return DarkGreen;
+	case OAK:
+		return Green;
+	}
+}
+
 GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList, Terrain terrain)
 {
 	this->treeList = treeList;
 	this->terrain = terrain;
 }
 
-std::vector<std::pair<Point, Point>> GrowthSimulator::Grow()
+std::vector<std::pair<ColoredPoint, ColoredPoint>> GrowthSimulator::Grow()
 { 
 	std::vector<std::pair<Point, Point>> branches;
+	ve.clear();
+
 	for (auto& tree : treeList)
 	{
 		branches = tree.Grow();
-		for (auto& branch : branches)
-			ve.push_back(branch);
+		ColorType color = pickColor(tree);
+		for (auto& branch : branches) {
+			ve.push_back(std::pair<ColoredPoint, ColoredPoint>(
+				{ branch.first.x, branch.first.y, branch.first.z, color },
+				{ branch.second.x, branch.second.y, branch.second.z, color }));
+		}
 	}
 	return ve;
 }

@@ -47,6 +47,12 @@ void SDLRenderer::SetColor(const ColorType& color)
     case Green:
         SDL_SetRenderDrawColor(rend, 0, 255, 0, 255);
         break;
+    case DarkGreen:
+        SDL_SetRenderDrawColor(rend, 38, 107, 13, 255);
+        break;
+    case Purple:
+        SDL_SetRenderDrawColor(rend, 169, 18, 240, 255);
+        break;
     default:
         SDL_SetRenderDrawColor(rend, 255, 165, 0, 255);
     }
