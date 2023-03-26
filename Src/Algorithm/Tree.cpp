@@ -11,6 +11,7 @@ Tree::Tree(Species_ID species)
 	{
 		this->td.stackDepth = tableEntry.stackDepth;
 		this->td.branchLength = tableEntry.branchLength;
+		this->td.splitAmount = tableEntry.splitAmount;
 		this->td.axioms = tableEntry.axioms;
 		this->td.angleSplit = tableEntry.angle;
 		this->stacks.rules = tableEntry.rules;

@@ -5,10 +5,21 @@
 
 Point IRule::Move(Point start, Point angle, float distance)
 {
+	int x, y, z;
 	srand((unsigned)time(NULL));
-	int x = start.x + (distance * angle.x + 0.01 * (rand() % 100));
-	int y = start.y + (distance * angle.y + 0.01 * (rand() % 100));
-	int z = start.z + (distance * angle.z + 0.01 * (rand() % 100));
+	if (rand() % 2 == 0) 
+	{
+		x = start.x + (distance * angle.x + 0.01 * (rand() % 100));
+		y = start.y + (distance * angle.y + 0.01 * (rand() % 100));
+		z = start.z + (distance * angle.z + 0.01 * (rand() % 100));
+	}
+	else
+	{
+		x = start.x + (distance * angle.x - 0.01 * (rand() % 100));
+		y = start.y + (distance * angle.y - 0.01 * (rand() % 100));
+		z = start.z + (distance * angle.z - 0.01 * (rand() % 100));
+	}
+	
 	return Point(x, y, z);
 }
 
@@ -23,8 +34,8 @@ void RuleSplit::apply(Tree& tree)
 	{
 		tree.stacks.rules.push_back(new RuleBranch);
 		tree.stacks.startingAngles.push_back(angle + tree.td.angleSplit);
-
-		for (int i = 0; i < rand() % 4; i++)
+		int splits = rand() % tree.td.splitAmount;
+		for (int i = splits / 2; i < splits; i++)
 		{
 			tree.stacks.rules.push_back(new RuleBranch);
 			tree.stacks.startingPoints.push_back(start); // second starting point for the second branch
@@ -51,20 +62,27 @@ void RuleBranch::apply(Tree& tree)
 	tree.stacks.startingAngles.push_front(angle);
 }
 
-void RuleLeaf::apply(Tree& tree)
-{
-	// pops point to mark the end of a branch
-}
-
 void RuleReplace::apply(Tree& tree)
 {
-	// pick axiom randomly
-	if (tree.stacks.rules.size() < tree.td.stackDepth)
-	{
-		// for each character from replace
-		tree.stacks.rules.push_front(new RuleBranch);
-		tree.stacks.rules.push_front(new RuleSplit);
-		tree.stacks.rules.push_front(new RuleReplace);
-		tree.stacks.rules.push_front(new RuleBranch);
+	auto option = rand() % tree.td.axioms.size();
+	auto axiom = tree.td.axioms.at(option);
+
+	for (auto& ch : axiom) {
+		if (tree.stacks.rules.size() < tree.td.stackDepth)
+		{
+			switch (ch) {
+			case 'R':
+				tree.stacks.rules.push_front(new RuleReplace);
+				break;
+			case 'S':
+				tree.stacks.rules.push_front(new RuleSplit);
+				break;
+			case 'B':
+				tree.stacks.rules.push_front(new RuleBranch);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 }

@@ -16,10 +16,6 @@ struct RuleBranch : public IRule {
 	void apply(Tree& tree);
 };
 
-struct RuleLeaf : public IRule {
-	void apply(Tree& tree);
-};
-
 struct RuleReplace : public IRule {
 	void apply(Tree& tree);
 };

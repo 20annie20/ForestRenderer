@@ -2,10 +2,10 @@
 
 void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range)
 {
-    Point e(window.GetWidth() / 4, 150, 450);
-    int x = (window.GetWidth() / 513) * in.x - e.x;
+    Point e(100, 150, 450);
+    int x = (window.GetWidth() / 513) * in.x;
     int y = (window.GetHeight() - 2 * e.y ) / 513  * in.y - e.y;
-    out.x = (e.z / in.z) * x + e.x;
+    out.x = (e.z / in.z) * x;
     out.y = ((e.z / in.z) * (-y) + e.y);
 }
 

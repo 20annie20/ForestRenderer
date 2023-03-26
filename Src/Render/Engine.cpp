@@ -9,30 +9,18 @@ Engine::Engine()
 	allocator = new RandomAllocator();
 	
 	// debug
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::PINE));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
-	treeVector.push_back(Tree(Species_ID::OAK));
+	for (int i = 0; i < 60; i++)
+	{
+		treeVector.push_back(Tree(Species_ID::PINE));
+	}
+	for (int i = 0; i < 40; i++)
+	{
+		treeVector.push_back(Tree(Species_ID::MAPLE));
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		treeVector.push_back(Tree(Species_ID::OAK));
+	}
 }
 
 Engine::~Engine()
@@ -82,7 +70,6 @@ void Engine::Run(AllocatorType allocType)
 				});
 
 			renderer->DrawEdges(ColoredLines, range);
-			//_sleep(200);
 			const auto ms = timer.Mark(); // ms counter to display
 		}
 	}

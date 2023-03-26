@@ -12,6 +12,7 @@ public:
 	{
 		Point beginning;
 		int stackDepth;
+		int splitAmount;
 		float branchLength;
 		Point angleSplit;
 		std::vector<std::string> axioms;
