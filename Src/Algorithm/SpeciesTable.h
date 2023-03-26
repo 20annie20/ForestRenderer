@@ -12,16 +12,16 @@ enum Species_ID
 
 struct SpeciesEntry
 {
-	static constexpr auto NO_SPECIES = 0;
+	Species_ID id = MAPLE;
 	int		stackDepth = 0;
+	float	branchLength = 0;
 	Point	angle = { 0, 0, 0 };
-	std::vector<Rule> rules;
+	std::vector<IRule*> rules;
+
+	SpeciesEntry(Species_ID id, int depth, float length, Point angle, std::vector<IRule*> rules);
 };
 
 struct SpeciesTable : std::vector<SpeciesEntry>
 {
-	SpeciesTable()
-	{
-		this->push_back({ MAPLE, 2, Point(0, 0, 0) });
-	}
+	SpeciesTable();
 };

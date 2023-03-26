@@ -1,34 +1,33 @@
 #pragma once
 #include "Common.h"
+#include "Rule.h"
+#include "SpeciesTable.h"
+#include <span>
 
 class Tree {
-public:
-	enum Species
-	{
-		Maple,
-		Pine,
-		Oak
-	};
+
 private:
-	Species species;
-	float x, z;
+	Species_ID species;
+	Point beginning;
+	float branchLength;
+	std::vector<IRule*> rules;
+	std::vector<std::pair<Point, Point>> branches;
 
-	struct node {
-		Point BranchBegin;
-		Point Angle;
-		float length;
-		struct node* left;
-		struct node* middle;
-		struct node* right;
-	};
-
-	// branches tree struct
-	// rules definition
+	template <typename T>
+	void ApplyRule(T& Rule);
 
 public:
 
-	Tree();
-	Tree(Species species);
+	Tree() = default;
+	Tree(Species_ID species);
 	void SetLocation(int x, int z);
+	void SetLocation(Point p);
 	Point GetLocation();
+	std::vector<std::pair<Point, Point>> Grow();
 };
+
+template<typename T>
+inline void Tree::ApplyRule(T& Rule)
+{
+	Rule->apply(); //aplly(this)
+}

@@ -5,7 +5,6 @@
 
 class RandomAllocator : public AllocatorAlgorithm
 {
-	void SetTreeList(std::vector<Tree> treeList);
 	void SetTerrain(Terrain terrain);
-	std::span<Point> Allocate();
+	void Allocate(std::vector<Tree>& treeList);
 };

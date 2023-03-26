@@ -6,42 +6,31 @@ Engine::Engine()
 	renderer = new SDLRenderer();
 	allocator = new RandomAllocator();
 	
-	// input Observer?
-	// 
 	// debug
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Pine));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-	treeVector.push_back(Tree(Tree::Species::Oak));
-
-	simulator = GrowthSimulator(treeVector, terrain);
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::PINE));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
+	treeVector.push_back(Tree(Species_ID::OAK));
 }
 
 Engine::~Engine()
@@ -65,8 +54,9 @@ void Engine::Run(AllocatorType allocType)
 	}
 	
 	allocator->SetTerrain(terrain);
-	allocator->SetTreeList(treeVector);
-	std::span<Point> allocationPoints = allocator->Allocate();
+	allocator->Allocate(treeVector);
+
+	simulator = GrowthSimulator(treeVector, terrain);
 	bool doQuit = false;
 
 	while (!doQuit)
@@ -76,6 +66,8 @@ void Engine::Run(AllocatorType allocType)
 				doQuit = true;
 			break;
 		}
+
+		//while not stop event
 		std::span<std::pair<Point, Point>> Lines = simulator.Grow();
 		renderer->DrawEdges(Lines, range);
 		const auto ms = timer.Mark();

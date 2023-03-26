@@ -1,17 +1,11 @@
 ﻿#pragma once
 #include "RandomAllocator.h"
 
-void RandomAllocator::SetTreeList(std::vector<Tree> treeList)
-{
-	this->treeList = treeList;
-}
-
 void RandomAllocator::SetTerrain(Terrain terrain)
 {
 	this->terrain = terrain;
 }
-
-std::span<Point> RandomAllocator::Allocate()
+ void RandomAllocator::Allocate(std::vector<Tree>& treeList)
 {
 	std::pair<int, int> mapSize = terrain.GetMapSize();
 
@@ -32,8 +26,6 @@ std::span<Point> RandomAllocator::Allocate()
 		t.SetLocation(distrX(generator), distrY(generator));
 		Point p = t.GetLocation();
 		p = terrain.GetHeight(p);
-		allocationPoints.push_back(p);
+		t.SetLocation(p);
 	}
-
-	return allocationPoints;
 }

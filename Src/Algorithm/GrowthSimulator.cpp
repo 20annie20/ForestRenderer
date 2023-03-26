@@ -8,8 +8,14 @@ GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList, Terrain terrain)
 }
 
 std::span<std::pair<Point, Point>> GrowthSimulator::Grow()
-{
-	ve.clear();
-	ve.push_back({Point(200, 100, 200, ColorType::Green), Point(200, 300, 200, ColorType::Green) });
+{ 
+	std::vector<std::pair<Point, Point>> branches;
+	for (auto& tree : treeList)
+	{
+		branches = tree.Grow();
+	}
+	for( auto& branch : branches )
+		ve.push_back(branch);
+
 	return ve;
 }
