@@ -17,7 +17,7 @@ Engine::Engine()
 	{
 		treeVector.push_back(Tree(Species_ID::MAPLE));
 	}
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 60; i++)
 	{
 		treeVector.push_back(Tree(Species_ID::OAK));
 	}

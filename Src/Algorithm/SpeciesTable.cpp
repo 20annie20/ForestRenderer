@@ -36,6 +36,7 @@ SpeciesTable::SpeciesTable()
 	oakRules.push_back(new RuleBranch());
 	oakRules.push_back(new RuleSplit());
 	oakRules.push_back(new RuleReplace());
+	oakRules.push_back(new RuleSplit());
 
 	rules->insert(std::pair<Species_ID, std::deque<IRule*>>(MAPLE, mapleRules));
 	rules->insert(std::pair<Species_ID, std::deque<IRule*>>(PINE, pineRules));
@@ -46,10 +47,10 @@ SpeciesTable::SpeciesTable()
 	);
 
 	this->push_back(
-		SpeciesEntry(PINE, 30, 14, 3.5f, Point(0.02f, 1.5f, 0.02f), rules->at(PINE), axioms[PINE] )
+		SpeciesEntry(PINE, 30, 12, 3.5f, Point(0.02f, 1.5f, 0.02f), rules->at(PINE), axioms[PINE] )
 	);
 
 	this->push_back(
-		SpeciesEntry(OAK, 12, 2, 10.0f, Point(0.1f, 0.3f, 0.2f), rules->at(OAK), axioms[OAK])
+		SpeciesEntry(OAK, 12, 3, 10.0f, Point(0.1f, 0.3f, 0.2f), rules->at(OAK), axioms[OAK])
 	);
 }
