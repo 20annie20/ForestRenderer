@@ -13,10 +13,9 @@ ColorType pickColor(Tree& tree)
 	}
 }
 
-GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList, Terrain terrain)
+GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList)
 {
 	this->treeList = treeList;
-	this->terrain = terrain;
 }
 
 std::vector<std::pair<ColoredPoint, ColoredPoint>> GrowthSimulator::Grow()

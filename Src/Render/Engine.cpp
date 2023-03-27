@@ -47,7 +47,7 @@ void Engine::Run(AllocatorType allocType)
 	allocator->SetTerrain(terrain);
 	allocator->Allocate(treeVector);
 
-	simulator = GrowthSimulator(treeVector, terrain);
+	simulator = GrowthSimulator(treeVector);
 	bool doQuit = false;
 	uint64_t iterations = 0;
 	while (!doQuit)
