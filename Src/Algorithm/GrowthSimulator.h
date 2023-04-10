@@ -8,6 +8,7 @@
 class GrowthSimulator
 {
 protected:
+	// TODO pass by reference through grow method
 	std::vector<Tree> treeList;
 	std::vector<std::pair<ColoredPoint, ColoredPoint>> ve;
 public:

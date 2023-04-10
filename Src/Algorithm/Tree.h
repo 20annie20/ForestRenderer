@@ -6,7 +6,8 @@
 #include <deque>
 
 class Tree {
-
+	
+// TODO add getters and setters and make private
 public:
 	struct TreeData
 	{
@@ -29,11 +30,7 @@ public:
 	TreeData td;
 	TreeStacks stacks;	
 
-	std::vector<std::pair<Point, Point>> branches; // these are current branches to draw
-
-private:
-	template <typename T>
-	void ApplyRule(T& Rule);
+	std::pair<Point, Point> branch; // can be only one branch per iteration
 
 public:
 
@@ -44,7 +41,7 @@ public:
 	Point GetLocation();
 
 
-	std::vector<std::pair<Point, Point>> Grow();
+	std::pair<Point, Point> Grow();
 
 	inline void ApplyRule(IRule* Rule)
 	{

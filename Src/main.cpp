@@ -26,7 +26,8 @@ int main(int argc, char* args[])
 	else
 	{
 		Engine engine = Engine();
-		engine.Run(AllocatorType::Random);
+		engine.Init(Random);
+		engine.Run(false);
 	}
 
 	window.DestroyWindow();

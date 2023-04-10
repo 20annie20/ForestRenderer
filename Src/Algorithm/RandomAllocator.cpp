@@ -1,11 +1,7 @@
 ﻿#pragma once
 #include "RandomAllocator.h"
 
-void RandomAllocator::SetTerrain(Terrain terrain)
-{
-	this->terrain = terrain;
-}
- void RandomAllocator::Allocate(std::vector<Tree>& treeList)
+ void RandomAllocator::Allocate(std::vector<Tree>& treeList, Terrain& terrain)
 {
 	std::pair<int, int> mapSize = terrain.GetMapSize();
 

@@ -37,10 +37,8 @@ Point Tree::GetLocation()
 	return td.beginning;
 }
 
-std::vector<std::pair<Point, Point>> Tree::Grow()
+std::pair<Point, Point> Tree::Grow()
 {
-	branches.clear();
-	td.branchLength *= 0.995;
 	td.angleSplit.x *= 1.005;
 	td.angleSplit.y *= 1.005;
 	td.angleSplit.z *= 1.005;
@@ -52,5 +50,5 @@ std::vector<std::pair<Point, Point>> Tree::Grow()
 		ApplyRule(rule);
 	}
 	
-	return branches;
+	return branch;
 }

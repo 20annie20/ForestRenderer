@@ -12,18 +12,22 @@
 
 class Engine
 {
-	Terrain terrain;
+	Terrain* terrain;
 	Renderer* renderer;
+	GUI* gui;
 	AllocatorAlgorithm* allocator;
 	GrowthSimulator simulator;
 	std::vector<Tree> treeVector;
+	// to do move to UI
 	Timer timer;
 	SDL_Event event;
+	bool growIndependently = true;
 
 public:
 	Engine();
-	~Engine();
-	//user input will be returning AllocatorType to choose from which allocator call the placement method
-	void Run(AllocatorType allocType);
+	void Init(AllocatorType allocType);
 	void Cleanup();
+	//user input will be returning AllocatorType to choose from which allocator call the placement method
+	void Run(bool growIndependently);
+	~Engine();
 };

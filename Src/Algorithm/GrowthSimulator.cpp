@@ -18,20 +18,18 @@ GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList)
 	this->treeList = treeList;
 }
 
+// TODO return span?
 std::vector<std::pair<ColoredPoint, ColoredPoint>> GrowthSimulator::Grow()
 { 
-	std::vector<std::pair<Point, Point>> branches;
 	ve.clear();
 
 	for (auto& tree : treeList)
 	{
-		branches = tree.Grow();
+		auto branch = tree.Grow();
 		ColorType color = pickColor(tree);
-		for (auto& branch : branches) {
-			ve.push_back(std::pair<ColoredPoint, ColoredPoint>(
-				{ branch.first.x, branch.first.y, branch.first.z, color },
-				{ branch.second.x, branch.second.y, branch.second.z, color }));
-		}
+		ve.push_back(std::pair<ColoredPoint, ColoredPoint>(
+			{ branch.first.x, branch.first.y, branch.first.z, color },
+			{ branch.second.x, branch.second.y, branch.second.z, color }));
 	}
 	return ve;
 }

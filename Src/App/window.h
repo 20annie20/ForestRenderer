@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <iostream>
 
 /// Window class
 /** A singleton window class, helps maintaining instance of an SDL window */
@@ -8,7 +9,7 @@ class Window {
     SDL_Window* sdlWindow = NULL;
     int width = 0;
     int height = 0;
-
+    bool showDemoWindow = true;
     Window();
 
 public:

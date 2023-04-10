@@ -22,7 +22,7 @@ void Terrain::GenerateHeight()
 	// perlin noise generation based on user input x, y
 }
 
-void Terrain::SaveHeight(Heightmap)
+void Terrain::SaveHeight()
 {
 }
 

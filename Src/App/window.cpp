@@ -1,5 +1,4 @@
 #include "Window.h"
-#include <iostream>
 
 Window::Window() {}
 
@@ -31,6 +30,7 @@ void Window::InitWindow(const char* windowTitle, const int width, const int heig
 	{
 		throw std::runtime_error( SDL_GetError() );
 	}
+	showDemoWindow = true;
 }
 
 int Window::GetWidth() const { return width; }

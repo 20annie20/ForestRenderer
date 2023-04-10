@@ -4,6 +4,7 @@
 class Tree;
 
 struct IRule {
+	// TODO rename apply to Apply
 	virtual void apply(Tree& tree) = 0;
 	static Point Move(Point start, Point angle, float distance);
 };

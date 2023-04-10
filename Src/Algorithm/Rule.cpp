@@ -55,7 +55,7 @@ void RuleBranch::apply(Tree& tree)
 	auto& angle = tree.stacks.startingAngles.back();
 	auto end = Move(start, angle, length );
 	
-	tree.branches.push_back(std::pair(start, end));
+	tree.branch = std::pair(start, end);
 	tree.stacks.startingPoints.pop_back();
 	tree.stacks.startingAngles.pop_back();
 	tree.stacks.startingPoints.push_front(end);
@@ -72,13 +72,13 @@ void RuleReplace::apply(Tree& tree)
 		{
 			switch (ch) {
 			case 'R':
-				tree.stacks.rules.push_front(new RuleReplace);
+				tree.stacks.rules.push_back(new RuleReplace);
 				break;
 			case 'S':
-				tree.stacks.rules.push_front(new RuleSplit);
+				tree.stacks.rules.push_back(new RuleSplit);
 				break;
 			case 'B':
-				tree.stacks.rules.push_front(new RuleBranch);
+				tree.stacks.rules.push_back(new RuleBranch);
 				break;
 			default:
 				break;

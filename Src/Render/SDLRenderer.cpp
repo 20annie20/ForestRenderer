@@ -1,5 +1,11 @@
 #include "SDLRenderer.h"
 
+SDLRenderer::SDLRenderer()
+{
+    ImGui_ImplSDL2_InitForSDLRenderer(window.GetSdlWindow(), rend);
+    ImGui_ImplSDLRenderer_Init(rend);
+}
+
 void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range)
 {
     Point e(100, 180, 450);
@@ -9,7 +15,7 @@ void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range
     out.y = ((e.z / in.z) * (-y) + e.y);
 }
 
-void SDLRenderer::DrawPoints( std::vector<ColoredPoint> points, const Point& range )
+void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Point& range )
 {
     ColoredPoint outPoint = ColoredPoint();
     
@@ -58,7 +64,7 @@ void SDLRenderer::SetColor(const ColorType& color)
     }
 }
 
-void SDLRenderer::DrawEdges(std::vector<std::pair<ColoredPoint, ColoredPoint>> edges, const Point& range)
+void SDLRenderer::DrawEdges(const std::vector<std::pair<ColoredPoint, ColoredPoint>>& edges, const Point& range)
 {
     ColoredPoint outPoint1 = ColoredPoint();
     ColoredPoint outPoint2 = ColoredPoint();
@@ -70,5 +76,19 @@ void SDLRenderer::DrawEdges(std::vector<std::pair<ColoredPoint, ColoredPoint>> e
         SetColor(edge.first.color);
         SDL_RenderDrawLine(rend, outPoint1.x, outPoint1.y, outPoint2.x, outPoint2.y);
     }
+}
+
+void SDLRenderer::DrawGUI(GUI& gui)
+{
+    ImGui_ImplSDLRenderer_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    gui.DrawFrame();
+    ImGui_ImplSDLRenderer_RenderDrawData(
+        ImGui::GetDrawData()
+    );
+}
+
+void SDLRenderer::Present()
+{
     SDL_RenderPresent(rend);
 }

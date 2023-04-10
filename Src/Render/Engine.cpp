@@ -5,8 +5,8 @@
 
 Engine::Engine()
 {
+	gui = new GUI();
 	renderer = new SDLRenderer();
-	allocator = new RandomAllocator();
 	
 	// debug
 	for (int i = 0; i < 60; i++)
@@ -23,33 +23,39 @@ Engine::Engine()
 	}
 }
 
-Engine::~Engine()
+void Engine::Init(AllocatorType allocType)
 {
-	delete renderer;
-	delete allocator;
-}
-
-void Engine::Run(AllocatorType allocType)
-{
-	Point range = Point(255, 400, 255);
-	renderer->DrawPoints(terrain.GetPoints<ColoredPoint>(), range);
-
 	switch (allocType)
 	{
-		case Random:
-			allocator = new RandomAllocator();
-			break;
-		default:
-			allocator = new RandomAllocator();
-			break;
+	case Random:
+		allocator = new RandomAllocator();
+		break;
+	default:
+		allocator = new RandomAllocator();
+		break;
 	}
-	
-	allocator->SetTerrain(terrain);
-	allocator->Allocate(treeVector);
+	terrain = new Terrain();
+}
 
+Engine::~Engine()
+{
+	Cleanup();
+	delete renderer;
+}
+
+void Engine::Run(bool growIndependently)
+{
+	Point range = Point(255, 400, 255);
+	renderer->DrawPoints(terrain->GetPoints<ColoredPoint>(), range);
+
+	allocator->Allocate(treeVector, *terrain);
+
+	// TODO: grow dependently
 	simulator = GrowthSimulator(treeVector);
+
 	bool doQuit = false;
 	uint64_t iterations = 0;
+	std::vector<std::pair<ColoredPoint, ColoredPoint>> Lines;
 	while (!doQuit)
 	{
 		while (SDL_PollEvent(&event)) {
@@ -57,17 +63,22 @@ void Engine::Run(AllocatorType allocType)
 				doQuit = true;
 			break;
 		}
-		while (iterations++ != MAX_TICKS) {
+
+
+		if (iterations++ < MAX_TICKS) {
 			//while not stop event
-			std::vector<std::pair<ColoredPoint, ColoredPoint>> Lines = simulator.Grow();
-
-
-			renderer->DrawEdges(Lines, range);
-			const auto ms = timer.Mark(); // ms counter to display
+			Lines = simulator.Grow();
 		}
+
+		renderer->DrawEdges(Lines, range);
+		renderer->DrawGUI(*gui);
+		const auto ms = timer.Mark(); // ms counter to display
+		renderer->Present();
 	}
 }
 
 void Engine::Cleanup()
 {
+	delete allocator;
+	delete terrain;
 }

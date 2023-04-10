@@ -33,7 +33,33 @@ set(SDL2_LIBRARIES "${SDL2_DIR}/lib/x64/SDL2.lib;${SDL2_DIR}/lib/x64/SDL2main.li
 include_directories(${SDL2_INCLUDE_DIR})
 target_link_libraries(forest_renderer ${SDL2_LIBRARIES})
 
-target_include_directories (forest_renderer
-  PUBLIC "${CMAKE_SOURCE_DIR}/Src")
+# ImGUI
+set(sources
+    External/ImGUI/imconfig.h
+    External/ImGUI/imgui.cpp
+    External/ImGUI/imgui.h
+    External/ImGUI/imgui_demo.cpp
+    External/ImGUI/imgui_draw.cpp
+    External/ImGUI/imgui_internal.h
+    External/ImGUI/imgui_tables.cpp
+    External/ImGUI/imgui_widgets.cpp
+    External/ImGUI/imstb_rectpack.h
+    External/ImGUI/imstb_textedit.h
+    External/ImGUI/imstb_truetype.h
+    External/ImGUI/backends/imgui_impl_sdl2.cpp
+    External/ImGUI/backends/imgui_impl_sdl2.h
+    External/ImGUI/backends/imgui_impl_sdlrenderer.h
+    External/ImGUI/backends/imgui_impl_sdlrenderer.cpp
+)
 
-target_link_libraries (forest_renderer)
+add_library(ImGUI ${sources})
+target_include_directories (ImGUI
+  PUBLIC "${CMAKE_SOURCE_DIR}/External/ImGUI"
+)
+target_link_libraries(forest_renderer ImGUI)
+
+target_include_directories (forest_renderer
+  PUBLIC "${CMAKE_SOURCE_DIR}/Src"
+  PUBLIC "${CMAKE_SOURCE_DIR}/External/ImGUI"
+  PUBLIC "${CMAKE_SOURCE_DIR}/External/ImGUI/backends"
+)

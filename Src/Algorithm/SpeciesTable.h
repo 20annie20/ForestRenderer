@@ -26,6 +26,7 @@ struct SpeciesEntry
 
 struct SpeciesTable : std::vector<SpeciesEntry>
 {
+	// TODO rename IRule to Rule
 	std::deque<IRule*> mapleRules;
 	std::deque<IRule*> pineRules;
 	std::deque<IRule*> oakRules;

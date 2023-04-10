@@ -11,10 +11,6 @@ enum AllocatorType
 
 class AllocatorAlgorithm
 {
-protected:
-	Terrain terrain;
-
 public:
-	virtual	void SetTerrain(Terrain terrain) = 0;
-	virtual	void Allocate(std::vector<Tree>& treeList) = 0;
+	virtual	void Allocate(std::vector<Tree>& treeList,Terrain& terrain) = 0;
 };
