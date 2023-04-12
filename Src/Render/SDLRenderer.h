@@ -16,8 +16,10 @@ class SDLRenderer : public Renderer
 
 public:	
 	SDLRenderer();
-	void DrawPoints(const std::vector<ColoredPoint>&, const Point& range);
-	void DrawEdges( const std::vector<std::pair<ColoredPoint, ColoredPoint>>&, const Point& range);
-	void DrawGUI( GUI& gui );
-	void Present();
+	void DrawPoints(const std::vector<ColoredPoint>&, const Point& range ) final;
+	void DrawEdges( const std::vector<std::pair<ColoredPoint, ColoredPoint>>&, const Point& range ) final;
+	void DrawGUI( GUI& gui, void(GUI::* drawFunc)() ) final;
+	void Present() final;
+	void Cleanup() final;
+	void Clear() final;
 };

@@ -19,7 +19,7 @@ GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList)
 }
 
 // TODO return span?
-std::vector<std::pair<ColoredPoint, ColoredPoint>> GrowthSimulator::Grow()
+std::vector<std::pair<ColoredPoint, ColoredPoint>>& GrowthSimulator::Grow()
 { 
 	ve.clear();
 

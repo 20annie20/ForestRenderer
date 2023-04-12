@@ -14,5 +14,5 @@ protected:
 public:
 	GrowthSimulator() = default;
 	GrowthSimulator(std::vector<Tree> treeList);
-	std::vector<std::pair<ColoredPoint, ColoredPoint>> Grow();
+	std::vector<std::pair<ColoredPoint, ColoredPoint>>& Grow();
 };

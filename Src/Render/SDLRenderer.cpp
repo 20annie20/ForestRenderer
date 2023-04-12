@@ -31,7 +31,6 @@ void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Poi
 
         SDL_RenderDrawPoint(rend, outPoint.x, outPoint.y);
     }
-    SDL_RenderPresent( rend );
 }
 
 void SDLRenderer::SetColor(const ColorType& color)
@@ -78,11 +77,11 @@ void SDLRenderer::DrawEdges(const std::vector<std::pair<ColoredPoint, ColoredPoi
     }
 }
 
-void SDLRenderer::DrawGUI(GUI& gui)
+void SDLRenderer::DrawGUI(GUI& gui, void(GUI::* drawFunc)())
 {
     ImGui_ImplSDLRenderer_NewFrame();
     ImGui_ImplSDL2_NewFrame();
-    gui.DrawFrame();
+    (gui.*drawFunc)();
     ImGui_ImplSDLRenderer_RenderDrawData(
         ImGui::GetDrawData()
     );
@@ -91,4 +90,16 @@ void SDLRenderer::DrawGUI(GUI& gui)
 void SDLRenderer::Present()
 {
     SDL_RenderPresent(rend);
+}
+
+void SDLRenderer::Cleanup()
+{
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
+}
+
+void SDLRenderer::Clear()
+{
+    SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
+    SDL_RenderClear(rend);
 }

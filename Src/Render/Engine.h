@@ -10,6 +10,12 @@
 #include "Utils\Timer.h"
 #include "Algorithm\GrowthSimulator.h"
 
+enum class EngineState
+{
+	SETUP_MENU,
+	SIMULATION
+};
+
 class Engine
 {
 	Terrain* terrain;
@@ -22,6 +28,7 @@ class Engine
 	Timer timer;
 	SDL_Event event;
 	bool growIndependently = true;
+	EngineState state = EngineState::SETUP_MENU;
 
 public:
 	Engine();
@@ -29,5 +36,6 @@ public:
 	void Cleanup();
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
 	void Run(bool growIndependently);
+	void SetState(EngineState state);
 	~Engine();
 };
