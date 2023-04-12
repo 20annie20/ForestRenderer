@@ -22,14 +22,18 @@ void Engine::Init(AllocatorType allocType)
 {
 	switch (allocType)
 	{
-	case Random:
-		allocator = new RandomAllocator();
+	case RANDOM:
+		allocatorFactory = new RandomAllocatorFactory();
+	break;
+	case OPTIMISED:
+		allocatorFactory = new OptimisedAllocatorFactory();
 		break;
 	default:
-		allocator = new RandomAllocator();
+		allocatorFactory = new RandomAllocatorFactory();
 		break;
 	}
 	terrain = new Terrain();
+	SetAllocator(*allocatorFactory);
 }
 
 Engine::~Engine()
@@ -119,12 +123,17 @@ void Engine::SetState(EngineState state)
 	this->state = state;
 }
 
+void Engine::SetAllocator(const AllocatorFactory &factory)
+{
+	this->allocator = factory.CreateAllocator();
+}
+
 std::unordered_map<Species_ID, int>& Engine::GetSpecies()
 {
 	return treesMap;
 }
 
-int Engine::GetIterations()
+int Engine::GetIterations() const
 {
 	return iterations;
 }

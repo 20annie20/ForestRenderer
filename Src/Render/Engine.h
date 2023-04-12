@@ -4,7 +4,10 @@
 #include "SDLRenderer.h"
 #include "Algorithm\Terrain.h"
 #include "Algorithm\AllocatorAlgorithm.h"
-#include "Algorithm\RandomAllocator.h"
+
+#include "Algorithm\AllocatorFactory.h"
+#include "Algorithm\RandomAllocatorFactory.h"
+#include "Algorithm\OptimisedAllocatorFactory.h"
 #include "Algorithm\Tree.h"
 #include <filesystem>
 #include "Utils\Timer.h"
@@ -21,6 +24,7 @@ class Engine
 	Terrain* terrain;
 	Renderer* renderer;
 	
+	AllocatorFactory* allocatorFactory;
 	AllocatorAlgorithm* allocator;
 	GrowthSimulator simulator;
 
@@ -45,7 +49,8 @@ public:
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
 	void Run(bool growIndependently);
 	void SetState(EngineState state);
+	void SetAllocator(const AllocatorFactory &factory);
+	int GetIterations() const;
 	std::unordered_map<Species_ID, int>& GetSpecies();
-	int GetIterations();
 	~Engine();
 };

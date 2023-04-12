@@ -1,5 +1,6 @@
 #include "GUI.h"
 #include "Engine.h"
+#include "Algorithm\AllocatorAlgorithm.h"
 #include <string> 
 
 #define stringify( name ) # name
@@ -46,17 +47,24 @@ void GUI::DrawStartupFrame()
 	ImGui::Begin("New Simulation");
 	
 	static int val[3] = { 0 };
+	AllocatorType allocType = RANDOM;
 
 	for (auto& i : engine.GetSpecies())
 	{
 		if (ImGui::InputInt(SpeciesNames[i.first], &val[i.first]))
 		{
-			i.second = val[i.first];
-		}
+			if (val[i.first] >= 0)
+			{
+				i.second = val[i.first];
+			}
+		}	
 	}
 
 	if (ImGui::Button("Begin"))
+	{
 		engine.SetState(EngineState::SIMULATION);
+		engine.Init(allocType);
+	}
 
 	ImGui::End();
 	ImGui::Render();

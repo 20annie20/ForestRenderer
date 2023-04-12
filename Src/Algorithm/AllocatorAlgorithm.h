@@ -5,12 +5,13 @@
 
 enum AllocatorType
 {
-	Random,
-	Cluster
+	RANDOM,
+	OPTIMISED
 };
 
 class AllocatorAlgorithm
 {
 public:
+	virtual ~AllocatorAlgorithm() {};
 	virtual	void Allocate(std::vector<Tree>& treeList,Terrain& terrain) = 0;
 };

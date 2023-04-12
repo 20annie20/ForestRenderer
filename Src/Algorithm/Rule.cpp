@@ -23,7 +23,7 @@ Point IRule::Move(Point start, Point angle, float distance)
 	return Point(x, y, z);
 }
 
-void RuleSplit::apply(Tree& tree)
+void RuleSplit::Apply(Tree& tree)
 {
 	// adds new branch rules with new angles, pushes two points for them
 	auto& start = tree.stacks.startingPoints.back();
@@ -48,7 +48,7 @@ void RuleSplit::apply(Tree& tree)
 	}
 }
 
-void RuleBranch::apply(Tree& tree)
+void RuleBranch::Apply(Tree& tree)
 {
 	auto length = tree.td.branchLength;	
 	auto& start = tree.stacks.startingPoints.back();
@@ -62,7 +62,7 @@ void RuleBranch::apply(Tree& tree)
 	tree.stacks.startingAngles.push_front(angle);
 }
 
-void RuleReplace::apply(Tree& tree)
+void RuleReplace::Apply(Tree& tree)
 {
 	auto option = rand() % tree.td.axioms.size();
 	auto axiom = tree.td.axioms.at(option);

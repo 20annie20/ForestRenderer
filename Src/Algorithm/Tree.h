@@ -45,7 +45,7 @@ public:
 
 	inline void ApplyRule(IRule* Rule)
 	{
-		Rule->apply(*this);
+		Rule->Apply(*this);
 	}
 
 };
