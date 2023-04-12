@@ -33,9 +33,10 @@ class Engine
 	SDL_Event event;
 
 	// application state
-	bool growIndependently = true;
+	bool growIndependently;
 	EngineState state = EngineState::SETUP_MENU;
 	std::unordered_map<Species_ID, int> treesMap;
+	uint64_t iterations;
 
 public:
 	Engine();
@@ -45,5 +46,6 @@ public:
 	void Run(bool growIndependently);
 	void SetState(EngineState state);
 	std::unordered_map<Species_ID, int>& GetSpecies();
+	int GetIterations();
 	~Engine();
 };

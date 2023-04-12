@@ -30,6 +30,7 @@ void GUI::DrawFrame()
 	ImGui::Begin("Statistics");
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
 		1000.0 / (double)(ImGui::GetIO().Framerate), (double)(ImGui::GetIO().Framerate));
+	ImGui::Text("Iteration: %i", engine.GetIterations());
 	if (ImGui::Button("New Simulation"))
 		engine.SetState(EngineState::SETUP_MENU);
 	ImGui::End();

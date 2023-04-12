@@ -3,12 +3,14 @@
 #include <chrono>
 #include <thread>
 
-#define MAX_TICKS 10000
+#define MAX_TICKS 1000
 
 Engine::Engine()
 {
 	gui = new GUI(*this);
 	renderer = new SDLRenderer();
+	iterations = 0;
+	growIndependently = true;
 	
 	for (const auto& i : allSpecies)
 	{
@@ -45,7 +47,6 @@ void Engine::Run(bool growIndependently)
 
 	bool doQuit = false;
 	bool startedSim = false;
-	uint64_t iterations = 0;
 	float timeSinceLastGrow = 0;
 	std::vector<std::pair<ColoredPoint, ColoredPoint>> lines;
 	std::vector<ColoredPoint> points = terrain->GetPoints<ColoredPoint>();
@@ -91,7 +92,6 @@ void Engine::Run(bool growIndependently)
 			}
 			
 			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.001) {
-				//while not stop event
 				auto& newLines = simulator.Grow();
 				lines.insert(lines.end(), newLines.begin(), newLines.end());
 				timeSinceLastGrow = 0;
@@ -122,4 +122,9 @@ void Engine::SetState(EngineState state)
 std::unordered_map<Species_ID, int>& Engine::GetSpecies()
 {
 	return treesMap;
+}
+
+int Engine::GetIterations()
+{
+	return iterations;
 }
