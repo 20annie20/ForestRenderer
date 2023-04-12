@@ -48,6 +48,7 @@ void GUI::DrawStartupFrame()
 	
 	static int val[3] = { 0 };
 	AllocatorType allocType = RANDOM;
+	TerrainType terrainType = FROM_MAP;
 
 	for (auto& i : engine.GetSpecies())
 	{
@@ -70,10 +71,20 @@ void GUI::DrawStartupFrame()
 	else
 		allocType = RANDOM;	
 
+	ImGui::Text("Terrain generation type:");
+	ImGui::SameLine();
+	static int t = 0;
+	ImGui::RadioButton("From Heightmap", &t, 0); ImGui::SameLine();
+	ImGui::RadioButton("From Perlin Noise", &t, 1);
+	if (t == 1)
+		terrainType = PERLIN;
+	else
+		terrainType = FROM_MAP;
+
 	if (ImGui::Button("Begin"))
 	{
 		engine.SetState(EngineState::SIMULATION);
-		engine.Init(allocType);
+		engine.Init(allocType, terrainType);
 	}
 
 	ImGui::End();

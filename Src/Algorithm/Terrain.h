@@ -5,19 +5,25 @@
 #include <vector>
 #include "Common.h"
 
+enum TerrainType
+{
+	FROM_MAP,
+	PERLIN
+};
+
 class Terrain {
+
 	enum SoilType
 	{
-		Mud,
-		Clay,
-		Sand,
-		Stones
+		MUD,
+		CLAY,
+		SAND,
+		STONES
 	};
 
 	Heightmap heightmapDTO; // composed heightmap
 
 public:
-	Terrain();
 	~Terrain();
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap

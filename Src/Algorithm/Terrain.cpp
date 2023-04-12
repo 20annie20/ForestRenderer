@@ -1,11 +1,6 @@
 ﻿#include "Terrain.h"
 #include <vector>
 
-Terrain::Terrain()
-{
-	LoadHeightMapFromFile("Resources/Heightmap_Rocky.bmp");
-}
-
 Terrain::~Terrain()
 {
 }

@@ -44,7 +44,7 @@ class Engine
 
 public:
 	Engine();
-	void Init(AllocatorType allocType);
+	void Init(AllocatorType allocType, TerrainType terrainType);
 	void Cleanup();
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
 	void Run(bool growIndependently);

@@ -18,7 +18,7 @@ Engine::Engine()
 	}
 }
 
-void Engine::Init(AllocatorType allocType)
+void Engine::Init(AllocatorType allocType, TerrainType terrainType)
 {
 	switch (allocType)
 	{
@@ -33,6 +33,15 @@ void Engine::Init(AllocatorType allocType)
 		break;
 	}
 	terrain = new Terrain();
+	if (terrainType == FROM_MAP)
+	{
+		terrain->LoadHeightMapFromFile("Resources/Heightmap_Rocky.bmp");
+	}
+	else
+	{
+		terrain->GenerateHeight();
+	}
+
 	SetAllocator(*allocatorFactory);
 }
 

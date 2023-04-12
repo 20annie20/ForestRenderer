@@ -10,6 +10,8 @@ ColorType pickColor(Tree& tree)
 		return DarkGreen;
 	case OAK:
 		return Green;
+	default:
+		return Green;
 	}
 }
 
