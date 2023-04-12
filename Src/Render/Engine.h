@@ -20,15 +20,22 @@ class Engine
 {
 	Terrain* terrain;
 	Renderer* renderer;
-	GUI* gui;
+	
 	AllocatorAlgorithm* allocator;
 	GrowthSimulator simulator;
+
 	std::vector<Tree> treeVector;
-	// to do move to UI
+
+	GUI* gui;
+
+	// TODO move to UI
 	Timer timer;
 	SDL_Event event;
+
+	// application state
 	bool growIndependently = true;
 	EngineState state = EngineState::SETUP_MENU;
+	std::unordered_map<Species_ID, int> treesMap;
 
 public:
 	Engine();
@@ -37,5 +44,6 @@ public:
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
 	void Run(bool growIndependently);
 	void SetState(EngineState state);
+	std::unordered_map<Species_ID, int>& GetSpecies();
 	~Engine();
 };

@@ -11,6 +11,8 @@ enum Species_ID
 	OAK
 };
 
+constexpr std::initializer_list<Species_ID> allSpecies = { MAPLE, PINE, OAK };
+
 struct SpeciesEntry
 {
 	Species_ID id = MAPLE;

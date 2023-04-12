@@ -10,18 +10,9 @@ Engine::Engine()
 	gui = new GUI(*this);
 	renderer = new SDLRenderer();
 	
-	// debug
-	for (int i = 0; i < 60; i++)
+	for (const auto& i : allSpecies)
 	{
-		treeVector.push_back(Tree(Species_ID::PINE));
-	}
-	for (int i = 0; i < 40; i++)
-	{
-		treeVector.push_back(Tree(Species_ID::MAPLE));
-	}
-	for (int i = 0; i < 60; i++)
-	{
-		treeVector.push_back(Tree(Species_ID::OAK));
+		treesMap[i] = 0;
 	}
 }
 
@@ -72,22 +63,34 @@ void Engine::Run(bool growIndependently)
 
 		if (state == EngineState::SETUP_MENU)
 		{
-			if (startedSim)
+			if (startedSim) // clean up previous simulation data
 			{
 				startedSim = false;
-				allocator->Allocate(treeVector, *terrain);
-				simulator = GrowthSimulator(treeVector);
 				iterations = 0;
 				timeSinceLastGrow = 0;
 				lines.clear();
+				treeVector.clear();
 			}
 			renderer->DrawGUI(*gui, &GUI::DrawStartupFrame);
 		}
 
 		else
 		{
-			startedSim = true;
-			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.01) {
+			if (!startedSim)
+			{
+				for (const auto& i : treesMap)
+				{
+					for (auto j = 0; j < i.second; j++)
+					{
+						treeVector.push_back(Tree(i.first));
+					}
+				}
+				startedSim = true;
+				allocator->Allocate(treeVector, *terrain);
+				simulator = GrowthSimulator(treeVector);
+			}
+			
+			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.001) {
 				//while not stop event
 				auto& newLines = simulator.Grow();
 				lines.insert(lines.end(), newLines.begin(), newLines.end());
@@ -97,9 +100,9 @@ void Engine::Run(bool growIndependently)
 			Point range = Point(255, 400, 255);
 			renderer->DrawPoints(points, range);
 			renderer->DrawEdges(lines, range);
-			const auto sec = timer.Mark(); // seconds counter to display FPS
-			timeSinceLastGrow += sec;
 			renderer->DrawGUI(*gui, &GUI::DrawFrame);
+			const auto sec = timer.Mark(); // seconds counter
+			timeSinceLastGrow += sec;
 		}
 		renderer->Present();
 	}
@@ -114,4 +117,9 @@ void Engine::Cleanup()
 void Engine::SetState(EngineState state)
 {
 	this->state = state;
+}
+
+std::unordered_map<Species_ID, int>& Engine::GetSpecies()
+{
+	return treesMap;
 }
