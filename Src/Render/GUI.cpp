@@ -60,6 +60,16 @@ void GUI::DrawStartupFrame()
 		}	
 	}
 
+	ImGui::Text("Trees allocation type:");
+	ImGui::SameLine();
+	static int e = 0;
+	ImGui::RadioButton("Random", &e, 0); ImGui::SameLine();
+	ImGui::RadioButton("Optimised", &e, 1);
+	if (e == 1)
+		allocType = OPTIMISED;
+	else
+		allocType = RANDOM;	
+
 	if (ImGui::Button("Begin"))
 	{
 		engine.SetState(EngineState::SIMULATION);
