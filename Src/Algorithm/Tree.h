@@ -21,7 +21,7 @@ public:
 
 	struct TreeStacks
 	{
-		std::deque<IRule*> rules;		  // running rules stack ( replacements happen so vector not queue)
+		std::deque<Rule*> rules;		  // running rules stack ( replacements happen so vector not queue)
 		std::deque<Point> startingPoints; // starting points stack
 		std::deque<Point> startingAngles; // starting angles stack
 	};
@@ -43,7 +43,7 @@ public:
 
 	std::pair<Point, Point> Grow();
 
-	inline void ApplyRule(IRule* Rule)
+	inline void ApplyRule(Rule* Rule)
 	{
 		Rule->Apply(*this);
 	}

@@ -32,6 +32,7 @@ void Terrain::GenerateHeight(int width, int length, int height)
 
 void Terrain::SaveHeight()
 {
+	// TODO
 }
 
 std::pair<int, int> Terrain::GetMapSize()

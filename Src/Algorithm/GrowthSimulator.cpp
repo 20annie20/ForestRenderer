@@ -15,12 +15,11 @@ ColorType pickColor(Tree& tree)
 	}
 }
 
-GrowthSimulator::GrowthSimulator(std::vector<Tree> treeList)
+GrowthSimulator::GrowthSimulator(std::span<Tree> treeList)
 {
 	this->treeList = treeList;
 }
 
-// TODO return span?
 std::vector<std::pair<ColoredPoint, ColoredPoint>>& GrowthSimulator::Grow()
 { 
 	ve.clear();

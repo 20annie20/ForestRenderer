@@ -29,7 +29,7 @@ public:
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap
 	void GenerateHeight(int, int, int);
-	void SaveHeight(); // TODO add this
+	void SaveHeight();
 	std::pair<int, int> GetMapSize(); 
 	int GetHeight(int i, int j);
 

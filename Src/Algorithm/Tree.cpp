@@ -45,7 +45,7 @@ std::pair<Point, Point> Tree::Grow()
 
 	if (!stacks.rules.empty())
 	{
-		IRule* rule = stacks.rules.back();
+		Rule* rule = stacks.rules.back();
 		stacks.rules.pop_back();
 		ApplyRule(rule);
 	}

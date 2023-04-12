@@ -3,7 +3,7 @@
 #include "Tree.h"
 #include<cstdlib>
 
-Point IRule::Move(Point start, Point angle, float distance)
+Point Rule::Move(Point start, Point angle, float distance)
 {
 	int x, y, z;
 	srand((unsigned)time(NULL));

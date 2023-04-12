@@ -20,18 +20,17 @@ struct SpeciesEntry
 	int		splitAmount = 0;
 	float	branchLength = 0;
 	Point	angle = { 0, 0, 0 };
-	std::deque<IRule*> rules;
+	std::deque<Rule*> rules;
 	std::vector<std::string> axioms;
 
-	SpeciesEntry(Species_ID id, int depth, int split, float length, Point angle, std::deque<IRule*> rules, std::vector<std::string> axioms);
+	SpeciesEntry(Species_ID id, int depth, int split, float length, Point angle, std::deque<Rule*> rules, std::vector<std::string> axioms);
 };
 
 struct SpeciesTable : std::vector<SpeciesEntry>
 {
-	// TODO rename IRule to Rule
-	std::deque<IRule*> mapleRules;
-	std::deque<IRule*> pineRules;
-	std::deque<IRule*> oakRules;
+	std::deque<Rule*> mapleRules;
+	std::deque<Rule*> pineRules;
+	std::deque<Rule*> oakRules;
 
 	std::unordered_map<Species_ID, std::vector<std::string>> axioms =
 	{
@@ -40,7 +39,7 @@ struct SpeciesTable : std::vector<SpeciesEntry>
 		{ OAK, { "SBSB", "RBSB", "SRB" } }
 	};
 	
-	std::unordered_map <Species_ID, std::deque<IRule*>>* rules = new std::unordered_map<Species_ID, std::deque<IRule*>>();
+	std::unordered_map <Species_ID, std::deque<Rule*>>* rules = new std::unordered_map<Species_ID, std::deque<Rule*>>();
 
 	SpeciesTable();
 };

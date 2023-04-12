@@ -59,7 +59,6 @@ void Engine::Run(bool growIndependently)
 	allocator->Allocate(treeVector, *terrain);
 	Point range = Point(200, terrain->GetMapSize().first / 3, terrain->GetMapSize().second);
 
-	// TODO: grow dependently
 	simulator = GrowthSimulator(treeVector);
 
 	bool doQuit = false;

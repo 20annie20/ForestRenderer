@@ -33,7 +33,6 @@ class Engine
 
 	GUI* gui;
 
-	// TODO move to UI
 	Timer timer;
 	SDL_Event event;
 

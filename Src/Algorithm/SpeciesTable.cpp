@@ -1,7 +1,7 @@
 #pragma once
 #include "SpeciesTable.h"
 
-SpeciesEntry::SpeciesEntry(Species_ID id, int depth, int amount, float length, Point angle, std::deque<IRule*> rules, std::vector<std::string> axioms)
+SpeciesEntry::SpeciesEntry(Species_ID id, int depth, int amount, float length, Point angle, std::deque<Rule*> rules, std::vector<std::string> axioms)
 {
 	this->id = id;
 	this->stackDepth = depth;
@@ -38,9 +38,9 @@ SpeciesTable::SpeciesTable()
 	oakRules.push_back(new RuleReplace());
 	oakRules.push_back(new RuleSplit());
 
-	rules->insert(std::pair<Species_ID, std::deque<IRule*>>(MAPLE, mapleRules));
-	rules->insert(std::pair<Species_ID, std::deque<IRule*>>(PINE, pineRules));
-	rules->insert(std::pair<Species_ID, std::deque<IRule*>>(OAK, oakRules));
+	rules->insert(std::pair<Species_ID, std::deque<Rule*>>(MAPLE, mapleRules));
+	rules->insert(std::pair<Species_ID, std::deque<Rule*>>(PINE, pineRules));
+	rules->insert(std::pair<Species_ID, std::deque<Rule*>>(OAK, oakRules));
 
 	this->push_back(
 		SpeciesEntry( MAPLE, 15, 8, 6.0f, Point(0.2f, 0.1f, 0.2f), rules->at(MAPLE), axioms[MAPLE])

@@ -3,19 +3,19 @@
 
 class Tree;
 
-struct IRule {
+struct Rule {
 	virtual void Apply(Tree& tree) = 0;
 	static Point Move(Point start, Point angle, float distance);
 };
 
-struct RuleSplit : public IRule {
+struct RuleSplit : public Rule {
 	void Apply(Tree& tree);
 };
 
-struct RuleBranch : public IRule {
+struct RuleBranch : public Rule {
 	void Apply(Tree& tree);
 };
 
-struct RuleReplace : public IRule {
+struct RuleReplace : public Rule {
 	void Apply(Tree& tree);
 };
