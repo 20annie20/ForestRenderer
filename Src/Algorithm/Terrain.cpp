@@ -12,9 +12,22 @@ void Terrain::LoadHeightMapFromFile(const char* filePath)
 	heightmapDTO.SetMapBuffer(bitmap->pixels);
 }
 
-void Terrain::GenerateHeight()
+void Terrain::GenerateHeight(int width, int length, int height)
 {
-	// perlin noise generation based on user input x, y
+	heightmapDTO = Heightmap(width, length);
+	PerlinNoise pn;
+
+	for (unsigned int i = 0; i < length; ++i) {     // y
+		for (unsigned int j = 0; j < width; ++j) {  // x
+			double x = (double)j / ((double)width);
+			double y = (double)i / ((double)length);
+
+			// Typical Perlin noise
+			double n = pn.Noise(10 * x, 10 * y, 0.8) * height;
+			heightmapDTO.SetHeight(j, i, n);
+		}
+	}
+	
 }
 
 void Terrain::SaveHeight()

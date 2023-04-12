@@ -3,6 +3,8 @@
 #include <chrono>
 #include <thread>
 
+#include <Windows.h>
+
 #define MAX_TICKS 1000
 
 Engine::Engine()
@@ -11,6 +13,7 @@ Engine::Engine()
 	renderer = new SDLRenderer();
 	iterations = 0;
 	growIndependently = true;
+	terrainSize = Point(0, 0, 0);
 	
 	for (const auto& i : allSpecies)
 	{
@@ -39,7 +42,7 @@ void Engine::Init(AllocatorType allocType, TerrainType terrainType)
 	}
 	else
 	{
-		terrain->GenerateHeight();
+		terrain->GenerateHeight(terrainSize.x, terrainSize.y, terrainSize.z);
 	}
 
 	SetAllocator(*allocatorFactory);
@@ -54,6 +57,7 @@ Engine::~Engine()
 void Engine::Run(bool growIndependently)
 {
 	allocator->Allocate(treeVector, *terrain);
+	Point range = Point(200, terrain->GetMapSize().first / 3, terrain->GetMapSize().second);
 
 	// TODO: grow dependently
 	simulator = GrowthSimulator(treeVector);
@@ -101,7 +105,9 @@ void Engine::Run(bool growIndependently)
 				}
 				startedSim = true;
 				allocator->Allocate(treeVector, *terrain);
+				range = Point(200, terrain->GetMapSize().second / 3, terrain->GetMapSize().first);
 				simulator = GrowthSimulator(treeVector);
+				points = terrain->GetPoints<ColoredPoint>();
 			}
 			
 			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.001) {
@@ -110,12 +116,16 @@ void Engine::Run(bool growIndependently)
 				timeSinceLastGrow = 0;
 				iterations++;
 			}
-			Point range = Point(255, 400, 255);
+			
 			renderer->DrawPoints(points, range);
 			renderer->DrawEdges(lines, range);
 			renderer->DrawGUI(*gui, &GUI::DrawFrame);
 			const auto sec = timer.Mark(); // seconds counter
 			timeSinceLastGrow += sec;
+
+			char buf[32];
+			sprintf(buf, "%f\n", sec);
+			OutputDebugStringA(buf);
 		}
 		renderer->Present();
 	}
@@ -130,6 +140,11 @@ void Engine::Cleanup()
 void Engine::SetState(EngineState state)
 {
 	this->state = state;
+}
+
+void Engine::SetTerrainSize(Point size)
+{
+	terrainSize = size;
 }
 
 void Engine::SetAllocator(const AllocatorFactory &factory)

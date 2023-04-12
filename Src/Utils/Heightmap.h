@@ -15,7 +15,12 @@ private:
 	union mapBuffer map;
 
 public:
-	Heightmap() = default;
+	Heightmap();
+	Heightmap(const Heightmap&);
+	Heightmap(Heightmap&&); // (move constructor)
+	Heightmap& operator=(const Heightmap&);
+	Heightmap& operator=(Heightmap&&);
+	~Heightmap();
 	Heightmap(int x, int y);
 	//void GenerateHeight(); perlin noise
 	int GetSizeX();
@@ -24,4 +29,5 @@ public:
 	float GetHeight(int i);
 	void SetHeight(int x, int y, float value);
 	void SetMapBuffer(void* pixels);
+	void Swap(Heightmap&);
 };

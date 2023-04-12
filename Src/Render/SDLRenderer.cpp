@@ -8,11 +8,10 @@ SDLRenderer::SDLRenderer()
 
 void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range)
 {
-    Point e(100, 180, 450);
     int x = (window.GetWidth() / 513) * in.x;
-    int y = (window.GetHeight() - 2 * e.y ) / 513  * in.y - e.y;
-    out.x = (e.z / in.z) * x;
-    out.y = ((e.z / in.z) * (-y) + e.y);
+    int y = (window.GetHeight() - 2 * range.y ) / 513  * in.y - range.y;
+    out.x = (range.z / in.z) * x;
+    out.y = ((range.z / in.z) * (-y) + range.y);
 }
 
 void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Point& range )

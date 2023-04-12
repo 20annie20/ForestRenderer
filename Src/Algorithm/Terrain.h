@@ -4,6 +4,7 @@
 #include <span>
 #include <vector>
 #include "Common.h"
+#include "PerlinNoise.h"
 
 enum TerrainType
 {
@@ -27,7 +28,7 @@ public:
 	~Terrain();
 
 	void LoadHeightMapFromFile(const char* filePath); // get surface from loader, transform it to heightmap
-	void GenerateHeight();
+	void GenerateHeight(int, int, int);
 	void SaveHeight(); // TODO add this
 	std::pair<int, int> GetMapSize(); 
 	int GetHeight(int i, int j);

@@ -81,6 +81,21 @@ void GUI::DrawStartupFrame()
 	else
 		terrainType = FROM_MAP;
 
+	static int terrSize[3] = { 0 };
+	ImGui::Text("Terrain size:");
+	if (ImGui::InputInt("width", &terrSize[0]))
+	{
+		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+	}
+	if (ImGui::InputInt("length", &terrSize[1]))
+	{
+		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+	}
+	if (ImGui::InputInt("height", &terrSize[2]))
+	{
+		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+	}
+
 	if (ImGui::Button("Begin"))
 	{
 		engine.SetState(EngineState::SIMULATION);

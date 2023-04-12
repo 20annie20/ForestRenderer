@@ -22,6 +22,7 @@ enum class EngineState
 class Engine
 {
 	Terrain* terrain;
+	Point terrainSize;
 	Renderer* renderer;
 	
 	AllocatorFactory* allocatorFactory;
@@ -49,6 +50,7 @@ public:
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
 	void Run(bool growIndependently);
 	void SetState(EngineState state);
+	void SetTerrainSize(Point size);
 	void SetAllocator(const AllocatorFactory &factory);
 	int GetIterations() const;
 	std::unordered_map<Species_ID, int>& GetSpecies();
