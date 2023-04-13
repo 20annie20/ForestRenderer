@@ -7,5 +7,8 @@
 class AllocatorFactory
 {
 public:
+	/**
+	* \brief Creates an instance of a tree allocator.
+	*/
 	virtual AllocatorAlgorithm *CreateAllocator() const = 0;
 };

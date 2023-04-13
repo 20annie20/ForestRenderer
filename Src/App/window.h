@@ -13,15 +13,39 @@ class Window {
     Window();
 
 public:
-    
     Window(Window& other) = delete;
     void operator=(const Window&) = delete;
 
+    /**
+    * \returns An instance of the Window singleton.
+    */
     static Window& GetInstance();
+
+    /**
+    * \brief Initializes the window instance.
+    * \param windowTitle - Title of the window to display on the titlebar.
+    * \param width - Width of the window's client area.
+    * \param height - Height of the window's client area.
+    */
     void InitWindow(const char* windowTitle, const int width, const int height);
 
+    /**
+    * \returns Width of the window's client area.
+    */
     int GetWidth() const;
+
+    /**
+    * \returns Height of the window's client area.
+    */
     int GetHeight() const;
+
+    /**
+    * \returns Native SDL_Window handle.
+    */
     SDL_Window* GetSdlWindow() const;
+
+    /**
+    * \brief Destroys the window.
+    */
     void DestroyWindow();
 };

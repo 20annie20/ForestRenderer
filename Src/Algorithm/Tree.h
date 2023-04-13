@@ -40,16 +40,37 @@ public:
 	std::pair<Point, Point> branch; // can be only one branch per iteration
 
 public:
-
 	Tree() = default;
 	Tree(Species_ID species);
-	void SetLocation(int x, int z);
+
+	/**
+	* \brief Sets the location of the tree in the terrain.
+	* \param x - Longitude of the tree's root.
+	* \param y - Latitude of the tree's root.
+	*/
+	void SetLocation(int x, int y);
+
+	/**
+	* \brief Sets the location of the tree in the terrain.
+	* \param p - Point that defines longitude and latitude of the tree's root.
+	*/
 	void SetLocation(Point p);
+
+	/**
+	* \returns Location (longitude and latitude) of the tree's root.
+	*/
 	Point GetLocation();
 
-
+	/**
+	* \brief Applies the next grow rule to the tree.
+	* \returns Points that define the edge of the new branch.
+	*/
 	std::pair<Point, Point> Grow();
 
+	/**
+	* \brief Applies a grow rule to the tree.
+	* \param rule - Rule to apply.
+	*/
 	inline void ApplyRule(Rule* Rule)
 	{
 		Rule->Apply(*this);

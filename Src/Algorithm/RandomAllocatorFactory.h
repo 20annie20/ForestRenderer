@@ -7,5 +7,8 @@
 class RandomAllocatorFactory : public AllocatorFactory
 {
 public:
+	/**
+	* \brief Creates an instance of a random tree allocator.
+	*/
 	AllocatorAlgorithm* CreateAllocator() const override;
 };

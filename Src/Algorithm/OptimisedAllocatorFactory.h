@@ -7,5 +7,8 @@
 class OptimisedAllocatorFactory : public AllocatorFactory
 {
 public:
+	/**
+	* \brief Creates an instance of an optimised tree allocator.
+	*/
 	AllocatorAlgorithm* CreateAllocator() const override;
 };
