@@ -27,7 +27,7 @@ int main(int argc, char* args[])
 	{
 		Engine engine = Engine();
 		engine.Init(RANDOM, FROM_MAP);
-		engine.Run(false);
+		engine.Run();
 	}
 
 	window.DestroyWindow();

@@ -56,7 +56,7 @@ Engine::~Engine()
 	delete renderer;
 }
 
-void Engine::Run(bool growIndependently)
+void Engine::Run()
 {
 	allocator->Allocate(treesMap, treeVector, *terrain);
 	Point range = Point(200, terrain->GetMapSize().first / 3, terrain->GetMapSize().second);

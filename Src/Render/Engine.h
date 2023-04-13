@@ -18,6 +18,9 @@ enum class EngineState
 	SIMULATION
 };
 
+/// Main class of the application that binds together components
+/** Engine is a class called from main and it is responsible for reacting to a state of application,
+calling rendering and algorithmic components. */
 class Engine
 {
 	Terrain* terrain;
@@ -49,7 +52,7 @@ public:
 	void Init(AllocatorType allocType, TerrainType terrainType);
 	void Cleanup();
 	//user input will be returning AllocatorType to choose from which allocator call the placement method
-	void Run(bool growIndependently);
+	void Run();
 	void SetState(EngineState state);
 	void SetTerrainSize(Point size);
 	void SetAllocator(const AllocatorFactory &factory);
