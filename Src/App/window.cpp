@@ -5,7 +5,7 @@ Window::Window() {}
 /** 
 * Singleton function to access single instance of a window object
 * 
-* \return instance of a window object
+* \returns instance of a window object
 */
 Window& Window::GetInstance()
 {

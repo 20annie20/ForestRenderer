@@ -13,7 +13,7 @@ public:
 	/**
 	* \brief Tries to open file from path and load data into SDL_Surface
 	* \param resourceName - relative path to the accessed resource
-	* \return SDL surface type read from file
+	* \returns SDL surface type read from file
 	*/
 	static SDL_Surface* GetSurfaceFromBitmap(const char* resourceName);
 };

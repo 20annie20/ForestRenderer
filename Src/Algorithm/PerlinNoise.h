@@ -3,6 +3,7 @@
 
 #ifndef PERLINNOISE_H
 #define PERLINNOISE_H
+#endif
 
 /// Perlin noise generating class
 /** Taken from: https://github.com/sol-prog/Perlin_Noise/blob/master/PerlinNoise.cpp

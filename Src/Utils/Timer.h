@@ -1,8 +1,9 @@
 #pragma once
 #include <chrono>
 
-/// Time measuring helper class
-/** Utility class that allows to measure time in a form of ticks. */
+/**
+ * \brief Time measuring helper class
+ Utility class that allows to measure time in a form of ticks. */
 class Timer
 {
 public:
@@ -14,7 +15,7 @@ public:
 	/// Marking point in time function
 	/**
 	* Marks how much time it took since previously calling this function.
-	* \return Time past since last Mark() in seconds
+	* \returns Time past since last Mark() in seconds
 	*/
 	float Mark() noexcept;
 private:
