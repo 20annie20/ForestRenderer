@@ -27,11 +27,12 @@ target_compile_features (forest_renderer PUBLIC cxx_std_20)
 
 # SDL
 message("Setting up SDL...")
-set(SDL2_DIR "C:/vclib/SDL2-2.26.4")
-set(SDL2_INCLUDE_DIR "${SDL2_DIR}/include")
-set(SDL2_LIBRARIES "${SDL2_DIR}/lib/x64/SDL2.lib;${SDL2_DIR}/lib/x64/SDL2main.lib")
-include_directories(${SDL2_INCLUDE_DIR})
-target_link_libraries(forest_renderer ${SDL2_LIBRARIES})
+find_package(SDL2 CONFIG REQUIRED)
+
+target_link_libraries(forest_renderer
+    PRIVATE
+    $<TARGET_NAME_IF_EXISTS:SDL2::SDL2main>
+    $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
 
 # ImGUI
 set(sources
@@ -56,7 +57,13 @@ add_library(ImGUI ${sources})
 target_include_directories (ImGUI
   PUBLIC "${CMAKE_SOURCE_DIR}/External/ImGUI"
 )
-target_link_libraries(forest_renderer ImGUI)
+
+target_link_libraries(ImGUI
+    PRIVATE
+    $<IF:$<TARGET_EXISTS:SDL2::SDL2>,SDL2::SDL2,SDL2::SDL2-static>)
+
+target_link_libraries(forest_renderer
+    PRIVATE ImGUI)
 
 target_include_directories (forest_renderer
   PUBLIC "${CMAKE_SOURCE_DIR}/Src"
