@@ -12,6 +12,12 @@ enum TerrainType
 	PERLIN
 };
 
+
+/// Terrain generation class
+/** Responsible for preparing terrain data to draw and to use in allocation simulation.
+* Can read heightmap from file or generate random terrain using PerlinNoise class. 
+* Asigns different colors based on the terrain height (assuming soil type depends on the height for simplicity).
+*/
 class Terrain {
 
 	enum SoilType

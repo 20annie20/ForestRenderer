@@ -2,6 +2,11 @@
 #include <vector>
 #include <utility>
 
+/// Abstract interface of renderer component
+/** Renderer is responsible for showing data processed by the application algorithms in a visual form on the screen. 
+It contains typical drawing functions like: clear the previous frame, show frame when it's ready, draw edges, draw points, draw GUI.
+At the end of program lifetime renderer cleans up the necessary contexts and clean remained objects.
+*/
 class Renderer
 {
 

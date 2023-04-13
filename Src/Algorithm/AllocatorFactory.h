@@ -2,6 +2,8 @@
 #include "Common.h"
 #include "AllocatorAlgorithm.h"
 
+/// Abstract allocator algorithm factory interface
+/** Interface of a factory that creates different types of Allocators */
 class AllocatorFactory
 {
 public:

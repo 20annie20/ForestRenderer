@@ -3,6 +3,11 @@
 #ifndef PERLINNOISE_H
 #define PERLINNOISE_H
 
+/// Perlin noise generating class
+/** Taken from: https://github.com/sol-prog/Perlin_Noise/blob/master/PerlinNoise.cpp
+Generates heights for the terrain using perlin noise.
+Copyright 2012 Sol
+*/
 class PerlinNoise {
 	// The permutation vector
 	std::vector<int> p;

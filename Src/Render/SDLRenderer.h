@@ -5,6 +5,10 @@
 #include "Common.h"
 #include <vector>
 
+/// Renderer interface realizing class using SDL2 library
+/** Initalizes required SDL state and utilites, draws objects using perspective transformation and contains all typical
+* render class functions such as: clear, present. Uses rendering from texture to optimise performance.
+*/
 class SDLRenderer : public Renderer
 {
 	Window& window = Window::GetInstance();

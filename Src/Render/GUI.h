@@ -6,6 +6,9 @@
 #include <imgui.h>
 #include "App/Window.h"
 
+/// Class responsible for graphical user interface
+/** Class that utilizes ImGui library to create, render UI widgets and handle user input from them. 
+Based on SDL backend */
 class GUI {
 	bool showStartupWindow = true;
 	ImGuiIO io;

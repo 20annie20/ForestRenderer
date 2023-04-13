@@ -13,6 +13,11 @@ enum Species_ID
 
 constexpr std::initializer_list<Species_ID> allSpecies = { MAPLE, PINE, OAK };
 
+/// Species related information structure
+/** Data necessary to distinguish different species visually - determines how much the branches split, what
+* are the replacement rules, branch default length, etc. as well as how many rules can be put into stack 
+* (prevents memory issues and limits the tree spreading).
+*/
 struct SpeciesEntry
 {
 	Species_ID id = MAPLE;
@@ -26,6 +31,10 @@ struct SpeciesEntry
 	SpeciesEntry(Species_ID id, int depth, int split, float length, Point angle, std::deque<Rule*> rules, std::vector<std::string> axioms);
 };
 
+/// Table containing all species entries
+/** Adding new species requires modyfing the table by adding another entry to it.
+* Tree object can easily get data based on its species from the table.
+*/
 struct SpeciesTable : std::vector<SpeciesEntry>
 {
 	std::deque<Rule*> mapleRules;

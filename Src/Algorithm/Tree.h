@@ -5,7 +5,15 @@
 #include <span>
 #include <deque>
 
-class Tree {
+/// Class used for each tree simulation
+/** Tracks information about the tree using information from SpeciesTable.
+* Has to be initalized with a value of SpeciesID enum to determine the generation behaviour.
+* Keeps track of the tree state using three double-sided lists: rules to process, starting points for the beginning
+* of new branches, angles of the new branches. In each iteration one from each list is taken from the end like from
+* a stack. New items are put at the beginning or end of the list depending on the rule that invoked them.
+*/
+class Tree 
+{
 	
 public:
 	struct TreeData

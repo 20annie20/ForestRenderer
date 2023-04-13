@@ -20,7 +20,9 @@ enum class EngineState
 
 /// Main class of the application that binds together components
 /** Engine is a class called from main and it is responsible for reacting to a state of application,
-calling rendering and algorithmic components. */
+calling rendering and algorithmic components. Two main states are: setup and actual simulation. In 
+setup user chooses parameters for the next simulation, in simulation firstly terrain generation is 
+called, then trees are allocated and lastly the actual forest is rendered as it grows in time. */
 class Engine
 {
 	Terrain* terrain;

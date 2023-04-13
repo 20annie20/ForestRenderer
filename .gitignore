@@ -367,7 +367,6 @@ FodyWeavers.xsd
 /vcpkg_installed
 *.vcxproj
 /ZERO_CHECK.vcxproj.filters
-/SDLRenderer.h
 /forest_renderer.vcxproj.filters
 /ForestRenderer.sln
 /cmake_install.cmake

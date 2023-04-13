@@ -5,6 +5,9 @@
 #include "Tree.h"
 #include "Terrain.h"
 
+/// Simulator of trees growth
+/** Prepares vector of all currently used branches from the tree vector data 
+adds according colors to be ready for rendering */
 class GrowthSimulator
 {
 protected:
