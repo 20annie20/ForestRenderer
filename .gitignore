@@ -358,18 +358,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-
-# Fody - auto-generated XML schema
-FodyWeavers.xsd
-/CMake
-/CMakeFiles
-/External/vcpkg
-/vcpkg_installed
-*.vcxproj
-/ZERO_CHECK.vcxproj.filters
-/forest_renderer.vcxproj.filters
-/ForestRenderer.sln
-/cmake_install.cmake
-/CMakeSettings.json
-/CMakeCache.txt
-/ALL_BUILD.vcxproj.filters
