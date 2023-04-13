@@ -15,6 +15,13 @@ protected:
 	std::vector<std::pair<ColoredPoint, ColoredPoint>> ve;
 public:
 	GrowthSimulator() = default;
+	/**
+	* \brief Constructor that passes treeList that is then used in the growing simulation
+	*/
 	GrowthSimulator(std::span<Tree> treeList);
+	/**
+	* \brief Runs one iteration of growth process on all the trees  stored in the treeList
+	* \returns all the branches that were created in this iteration
+	*/
 	std::vector<std::pair<ColoredPoint, ColoredPoint>>& Grow();
 };

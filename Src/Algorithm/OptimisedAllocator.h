@@ -12,5 +12,14 @@ class OptimisedAllocator : public AllocatorAlgorithm
 	std::unordered_map<Species_ID, Point> centroids;
 	void FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList);
 public:
+	/**
+	* \brief Asigns each tree a Point coordinate 
+	* First it assings a random point using terrain height and width, length coordinates
+	* Then for each tree species group, a random centroid is selected between their maximum and minimum width and length
+	* coordinates and the trees are iteratively moved toward that centroid to create a cluster.
+	* \param[in] tm tree map with amount of trees for each species
+	* \param[out] treeList contains all trees with their location to set
+	* \param[in] terrain is the terrain data with heights needed to set starting points of the trees
+	*/
 	void Allocate(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList, Terrain& terrain);
 };
