@@ -4,7 +4,6 @@
 #include "SDLRenderer.h"
 #include "Algorithm\Terrain.h"
 #include "Algorithm\AllocatorAlgorithm.h"
-
 #include "Algorithm\AllocatorFactory.h"
 #include "Algorithm\RandomAllocatorFactory.h"
 #include "Algorithm\OptimisedAllocatorFactory.h"

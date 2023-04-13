@@ -1,6 +1,11 @@
 #pragma once
 #include "Common.h"
 
+/// Heightmap data structure
+/** Structure stores data for the terrain generation in a form of a buffer
+of size X and Y, representing width and length. It is used to transfer data 
+from a bitmap surface file to an array of heights that can be indexed as
+one dimensional buffer or by using 2D coordinates.*/
 struct Heightmap
 {
 private:
