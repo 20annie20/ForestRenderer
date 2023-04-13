@@ -26,7 +26,12 @@ void OptimisedAllocator::FindCentroids(std::unordered_map<Species_ID, int>& tm, 
 				minZ = treeList[it].GetLocation().z;
 			}
 		}
-		centroids[i.first] = Point( (maxX + minX) / 2 , 0, (maxZ + minZ) / 2);
+		std::random_device                  rand_dev;
+		std::mt19937                        generator(rand_dev());
+
+		std::uniform_int_distribution<int>  distrX(minX, maxX);
+		std::uniform_int_distribution<int>  distrZ(minZ, maxZ);
+		centroids[i.first] = Point(distrX(generator), 0, distrZ(generator));
 	}
 }
 
@@ -59,7 +64,7 @@ void OptimisedAllocator::Allocate(std::unordered_map<Species_ID, int>& tm,std::v
 	float step = 10;
 	for(auto& t : treeList)
 	{
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 30; i++)
 		{
 
 			Point a = t.GetLocation();

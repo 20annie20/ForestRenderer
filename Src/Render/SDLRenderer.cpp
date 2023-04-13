@@ -18,6 +18,7 @@ void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Poi
 {
     SDL_SetRenderTarget(rend, texTarget);
     SDL_RenderClear(rend);
+    SDL_SetRenderTarget(rend, texTarget);
 
     ColoredPoint outPoint = ColoredPoint();
     
@@ -38,7 +39,6 @@ void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Poi
 
 void SDLRenderer::RenderFromTexture()
 {
-    SDL_RenderClear(rend);
     SDL_RenderCopy(rend, texTarget, NULL, NULL);
 }
 
@@ -77,6 +77,7 @@ void SDLRenderer::DrawEdges(const std::vector<std::pair<ColoredPoint, ColoredPoi
     ColoredPoint outPoint1 = ColoredPoint();
     ColoredPoint outPoint2 = ColoredPoint();
 
+    SDL_SetRenderTarget(rend, texTarget);
     for (auto& edge : edges)
     {
         TransformPoint(edge.first, outPoint1, range);
@@ -84,6 +85,7 @@ void SDLRenderer::DrawEdges(const std::vector<std::pair<ColoredPoint, ColoredPoi
         SetColor(edge.first.color);
         SDL_RenderDrawLine(rend, outPoint1.x, outPoint1.y, outPoint2.x, outPoint2.y);
     }
+    SDL_SetRenderTarget(rend, NULL);
 }
 
 void SDLRenderer::DrawGUI(GUI& gui, void(GUI::* drawFunc)())
@@ -110,5 +112,6 @@ void SDLRenderer::Cleanup()
 void SDLRenderer::Clear()
 {
     SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
+    SDL_SetRenderTarget(rend, NULL);
     SDL_RenderClear(rend);
 }

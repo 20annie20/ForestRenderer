@@ -30,6 +30,7 @@ class Engine
 	GrowthSimulator simulator;
 
 	std::vector<Tree> treeVector;
+	std::vector<std::pair<ColoredPoint, ColoredPoint>> lines;
 
 	GUI* gui;
 
@@ -41,6 +42,8 @@ class Engine
 	EngineState state = EngineState::SETUP_MENU;
 	std::unordered_map<Species_ID, int> treesMap;
 	uint64_t iterations;
+	uint64_t branches;
+	float speed = 0.001;
 
 public:
 	Engine();
@@ -51,7 +54,9 @@ public:
 	void SetState(EngineState state);
 	void SetTerrainSize(Point size);
 	void SetAllocator(const AllocatorFactory &factory);
+	void SetSpeed(float speed);
 	int GetIterations() const;
+	int GetBranches() const;
 	std::unordered_map<Species_ID, int>& GetSpecies();
 	~Engine();
 };

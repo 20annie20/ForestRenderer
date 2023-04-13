@@ -5,7 +5,7 @@
 
 #include <Windows.h>
 
-#define MAX_TICKS 1000
+#define MAX_TICKS 10000
 
 Engine::Engine()
 {
@@ -14,6 +14,8 @@ Engine::Engine()
 	iterations = 0;
 	growIndependently = true;
 	terrainSize = Point(0, 0, 0);
+	branches = 0;
+	speed = 0.001;
 	
 	for (const auto& i : allSpecies)
 	{
@@ -63,10 +65,11 @@ void Engine::Run(bool growIndependently)
 
 	bool doQuit = false;
 	bool startedSim = false;
-	float timeSinceLastGrow = 0;
-	std::vector<std::pair<ColoredPoint, ColoredPoint>> lines;
+	float timeSinceLastGrow = 10;
+	
 	std::vector<ColoredPoint> points = terrain->GetPoints<ColoredPoint>();
-	lines.reserve(2'000'000'000 / 16);
+	std::vector<std::pair<ColoredPoint, ColoredPoint>> lines;
+	
 	while (!doQuit)
 	{
 		while (SDL_PollEvent(&event)) 
@@ -84,7 +87,8 @@ void Engine::Run(bool growIndependently)
 			{
 				startedSim = false;
 				iterations = 0;
-				timeSinceLastGrow = 0;
+				branches = 0;
+				timeSinceLastGrow = 10;
 				lines.clear();
 				treeVector.clear();
 			}
@@ -110,15 +114,15 @@ void Engine::Run(bool growIndependently)
 				renderer->DrawPoints(points, range);
 			}
 			
-			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.001) {
-				auto& newLines = simulator.Grow();
-				lines.insert(lines.end(), newLines.begin(), newLines.end());
+			if (iterations < MAX_TICKS && timeSinceLastGrow > (10 - speed)) {
+				lines = simulator.Grow();
+				branches += lines.size();
 				timeSinceLastGrow = 0;
 				iterations++;
 			}
-			
-			renderer->RenderFromTexture();
+
 			renderer->DrawEdges(lines, range);
+			renderer->RenderFromTexture();
 			renderer->DrawGUI(*gui, &GUI::DrawFrame);
 			const auto sec = timer.Mark(); // seconds counter
 			timeSinceLastGrow += sec;
@@ -142,6 +146,11 @@ void Engine::SetState(EngineState state)
 	this->state = state;
 }
 
+void Engine::SetSpeed(float speed)
+{
+	this->speed = speed;
+}
+
 void Engine::SetTerrainSize(Point size)
 {
 	terrainSize = size;
@@ -160,4 +169,9 @@ std::unordered_map<Species_ID, int>& Engine::GetSpecies()
 int Engine::GetIterations() const
 {
 	return iterations;
+}
+
+int Engine::GetBranches() const
+{
+	return branches;
 }

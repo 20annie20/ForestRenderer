@@ -26,15 +26,24 @@ void GUI::DrawFrame()
 {
 	ImGui::NewFrame();
 	// rysowanie
-	ImGui::SetNextWindowSize(ImVec2(400, 100));
+	ImGui::SetNextWindowSize(ImVec2(400, 120));
 	ImGui::SetNextWindowPos(ImVec2(0, 0));
 	ImGui::Begin("Statistics");
 	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
 		1000.0 / (double)(ImGui::GetIO().Framerate), (double)(ImGui::GetIO().Framerate));
 	ImGui::Text("Iteration: %i", engine.GetIterations());
+	ImGui::Text("Branches: %i", engine.GetBranches());
+	
+	static float speed = 0.0;
+	if (ImGui::SliderFloat("Speed", &speed, 0.0, 10.0, "%.3f", 0))
+	{
+		engine.SetSpeed(speed);
+	}
+
 	if (ImGui::Button("New Simulation"))
 		engine.SetState(EngineState::SETUP_MENU);
 	ImGui::End();
+
 	ImGui::Render();
 }
 
@@ -53,6 +62,10 @@ void GUI::DrawStartupFrame()
 			if (val[i.first] >= 0)
 			{
 				i.second = val[i.first];
+			}
+			else
+			{
+				val[i.first] = 0;
 			}
 		}	
 	}
@@ -91,15 +104,24 @@ void GUI::DrawStartupFrame()
 	ImGui::Text("Terrain size:");
 	if (ImGui::InputInt("width", &terrSize[0]))
 	{
-		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		if (terrSize[0] > 0)
+			engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		else
+			terrSize[0] = 1;
 	}
 	if (ImGui::InputInt("length", &terrSize[1]))
 	{
-		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		if (terrSize[1] > 0)
+			engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		else
+			terrSize[1] = 1;
 	}
 	if (ImGui::InputInt("height", &terrSize[2]))
 	{
-		engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		if (terrSize[2] > 0)
+			engine.SetTerrainSize(Point(terrSize[0], terrSize[1], terrSize[2]));
+		else
+			terrSize[2] = 1;
 	}
 
 	if (ImGui::Button("Begin"))
