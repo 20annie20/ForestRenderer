@@ -51,16 +51,61 @@ class Engine
 
 public:
 	Engine();
-	void Init(AllocatorType allocType, TerrainType terrainType);
-	void Cleanup();
-	//user input will be returning AllocatorType to choose from which allocator call the placement method
-	void Run();
-	void SetState(EngineState state);
-	void SetTerrainSize(Point size);
-	void SetAllocator(const AllocatorFactory &factory);
-	void SetSpeed(float speed);
-	int GetIterations() const;
-	int GetBranches() const;
-	std::unordered_map<Species_ID, int>& GetSpecies();
 	~Engine();
+
+	/**
+	* \brief Initializes the engine.
+	* \param allocType - Tree allocator type to use.
+	* \param terrainType - Terrain type to use.
+	*/
+	void Init(AllocatorType allocType, TerrainType terrainType);
+
+	/**
+	* \brief Releases all engine's resources.
+	*/
+	void Cleanup();
+
+	/**
+	* \brief Runs the application's main loop.
+	*/
+	void Run();
+
+	/**
+	* \brief Moves the engine into a new state.
+	* \param state - New engine state.
+	*/
+	void SetState(EngineState state);
+
+	/**
+	* \brief Sets the size of terrain to generate on the next call to Init.
+	* \param size - Size of the terrain.
+	*/
+	void SetTerrainSize(Point size);
+
+	/**
+	* \brief Sets the new tree allocator to use in the next simulation.
+	* \param factory - Allocator factory.
+	*/
+	void SetAllocator(const AllocatorFactory &factory);
+
+	/**
+	* \brief Sets the speed of the simulation.
+	* \param speed - Simulation speed.
+	*/
+	void SetSpeed(float speed);
+
+	/**
+	* \returns The current iteration number.
+	*/
+	int GetIterations() const;
+
+	/**
+	* \returns The number of branches in the current iteration.
+	*/
+	int GetBranches() const;
+
+	/**
+	* \returns The number of each tree species.
+	*/
+	std::unordered_map<Species_ID, int>& GetSpecies();
 };

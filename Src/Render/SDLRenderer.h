@@ -19,13 +19,50 @@ class SDLRenderer : public Renderer
 	void TransformPoint(const Point& in, Point& out, const Point& range);
 	void SetColor(const ColorType& color);
 
-public:	
+public:
+	/**
+	* \brief Constructs an SDL2-based renderer.
+	*/
 	SDLRenderer();
+
+	/**
+	* \brief Draws points to the render target.
+	* \param points - Array of points to draw.
+	* \param range - View range.
+	*/
 	void DrawPoints(const std::vector<ColoredPoint>&, const Point& range ) final;
+
+	/**
+	* \brief Draws edges to the render target.
+	* \param edges - Array of edges to draw.
+	* \param range - View range.
+	*/
 	void DrawEdges( const std::vector<std::pair<ColoredPoint, ColoredPoint>>&, const Point& range ) final;
+
+	/**
+	* \brief Draws GUI to the render target.
+	* \param gui - GUI to draw.
+	* \param drawFunc - GUI drawing function to use.
+	*/
 	void DrawGUI( GUI& gui, void(GUI::* drawFunc)() ) final;
+
+	/**
+	* \brief Draws accumulated points and edges to the render target.
+	*/
 	void RenderFromTexture() final;
+
+	/**
+	* \brief Presents the render target to screen.
+	*/
 	void Present() final;
+
+	/**
+	* Releases renderer's resources.
+	*/
 	void Cleanup() final;
+
+	/**
+	* \brief Clears render target.
+	*/
 	void Clear() final;
 };

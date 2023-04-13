@@ -16,6 +16,14 @@ class GUI {
 
 public:
 	GUI(Engine& engine);
+
+	/**
+	* \brief Draws simulation GUI with render stats.
+	*/
 	void DrawFrame();
+	
+	/**
+	* \brief Draws startup GUI with new simulation options.
+	*/
 	void DrawStartupFrame();
 };
