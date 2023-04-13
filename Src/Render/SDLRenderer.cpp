@@ -16,6 +16,9 @@ void SDLRenderer::TransformPoint(const Point& in, Point& out, const Point& range
 
 void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Point& range )
 {
+    SDL_SetRenderTarget(rend, texTarget);
+    SDL_RenderClear(rend);
+
     ColoredPoint outPoint = ColoredPoint();
     
     for( auto& point : points )
@@ -30,6 +33,13 @@ void SDLRenderer::DrawPoints( const std::vector<ColoredPoint>& points, const Poi
 
         SDL_RenderDrawPoint(rend, outPoint.x, outPoint.y);
     }
+    SDL_SetRenderTarget(rend, NULL);
+}
+
+void SDLRenderer::RenderFromTexture()
+{
+    SDL_RenderClear(rend);
+    SDL_RenderCopy(rend, texTarget, NULL, NULL);
 }
 
 void SDLRenderer::SetColor(const ColorType& color)

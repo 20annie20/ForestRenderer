@@ -7,7 +7,6 @@
 
 class Tree {
 	
-// TODO add getters and setters and make private
 public:
 	struct TreeData
 	{
@@ -25,7 +24,7 @@ public:
 		std::deque<Point> startingPoints; // starting points stack
 		std::deque<Point> startingAngles; // starting angles stack
 	};
-	// TODO add getters and setters and make private
+
 	Species_ID species;
 	TreeData td;
 	TreeStacks stacks;	

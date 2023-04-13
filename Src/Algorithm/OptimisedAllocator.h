@@ -5,5 +5,8 @@
 
 class OptimisedAllocator : public AllocatorAlgorithm
 {
-	void Allocate(std::vector<Tree>& treeList, Terrain& terrain);
+	std::unordered_map<Species_ID, Point> centroids;
+
+	void FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList);
+	void Allocate(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList, Terrain& terrain);
 };

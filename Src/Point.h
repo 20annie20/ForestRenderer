@@ -11,7 +11,6 @@ enum ColorType
 	Purple
 };
 
-// TODO move to point file and include 
 struct Point {
 	float x, y, z;
 	

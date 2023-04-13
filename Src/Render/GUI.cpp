@@ -43,13 +43,9 @@ void GUI::DrawStartupFrame()
 	ImGui::NewFrame();
 	ImGui::SetNextWindowSize(ImVec2(500, 300));
 	ImGui::SetNextWindowPos(ImVec2(Window::GetInstance().GetWidth() / 2 - 250, Window::GetInstance().GetHeight() / 2 - 150));
-
 	ImGui::Begin("New Simulation");
 	
 	static int val[3] = { 0 };
-	AllocatorType allocType = RANDOM;
-	TerrainType terrainType = FROM_MAP;
-
 	for (auto& i : engine.GetSpecies())
 	{
 		if (ImGui::InputInt(SpeciesNames[i.first], &val[i.first]))
@@ -61,25 +57,35 @@ void GUI::DrawStartupFrame()
 		}	
 	}
 
+	AllocatorType allocType = RANDOM;
 	ImGui::Text("Trees allocation type:");
 	ImGui::SameLine();
 	static int e = 0;
 	ImGui::RadioButton("Random", &e, 0); ImGui::SameLine();
 	ImGui::RadioButton("Optimised", &e, 1);
 	if (e == 1)
+	{
 		allocType = OPTIMISED;
+	}
 	else
-		allocType = RANDOM;	
+	{
+		allocType = RANDOM;
+	}
 
+	TerrainType terrainType = FROM_MAP;
 	ImGui::Text("Terrain generation type:");
 	ImGui::SameLine();
 	static int t = 0;
 	ImGui::RadioButton("From Heightmap", &t, 0); ImGui::SameLine();
 	ImGui::RadioButton("From Perlin Noise", &t, 1);
 	if (t == 1)
+	{
 		terrainType = PERLIN;
+	}
 	else
+	{
 		terrainType = FROM_MAP;
+	}
 
 	static int terrSize[3] = { 0 };
 	ImGui::Text("Terrain size:");

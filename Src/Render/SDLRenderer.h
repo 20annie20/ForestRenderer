@@ -10,6 +10,7 @@ class SDLRenderer : public Renderer
 	Window& window = Window::GetInstance();
 	Uint32 renderFlags = SDL_RENDERER_ACCELERATED;
 	SDL_Renderer* rend = SDL_CreateRenderer(window.GetSdlWindow(), -1, renderFlags);
+	SDL_Texture* texTarget = SDL_CreateTexture(rend, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, window.GetWidth(), window.GetHeight());
 	
 	void TransformPoint(const Point& in, Point& out, const Point& range);
 	void SetColor(const ColorType& color);
@@ -19,6 +20,7 @@ public:
 	void DrawPoints(const std::vector<ColoredPoint>&, const Point& range ) final;
 	void DrawEdges( const std::vector<std::pair<ColoredPoint, ColoredPoint>>&, const Point& range ) final;
 	void DrawGUI( GUI& gui, void(GUI::* drawFunc)() ) final;
+	void RenderFromTexture() final;
 	void Present() final;
 	void Cleanup() final;
 	void Clear() final;

@@ -10,6 +10,7 @@ public:
 	virtual void DrawPoints( const std::vector<struct ColoredPoint>&, const struct Point& range ) = 0;
 	virtual void DrawEdges( const std::vector<std::pair<struct ColoredPoint, struct ColoredPoint>>&, const struct Point& range) = 0;
 	virtual void DrawGUI(class GUI& gui, void(GUI::*drawFunc)() ) = 0;
+	virtual void RenderFromTexture() = 0;
 	virtual void Present() = 0;
 	virtual void Cleanup() = 0;
 };

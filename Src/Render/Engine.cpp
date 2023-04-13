@@ -56,7 +56,7 @@ Engine::~Engine()
 
 void Engine::Run(bool growIndependently)
 {
-	allocator->Allocate(treeVector, *terrain);
+	allocator->Allocate(treesMap, treeVector, *terrain);
 	Point range = Point(200, terrain->GetMapSize().first / 3, terrain->GetMapSize().second);
 
 	simulator = GrowthSimulator(treeVector);
@@ -103,10 +103,11 @@ void Engine::Run(bool growIndependently)
 					}
 				}
 				startedSim = true;
-				allocator->Allocate(treeVector, *terrain);
+				allocator->Allocate(treesMap, treeVector, *terrain);
 				range = Point(200, terrain->GetMapSize().second / 3, terrain->GetMapSize().first);
 				simulator = GrowthSimulator(treeVector);
 				points = terrain->GetPoints<ColoredPoint>();
+				renderer->DrawPoints(points, range);
 			}
 			
 			if (iterations < MAX_TICKS && timeSinceLastGrow > 0.001) {
@@ -116,7 +117,7 @@ void Engine::Run(bool growIndependently)
 				iterations++;
 			}
 			
-			renderer->DrawPoints(points, range);
+			renderer->RenderFromTexture();
 			renderer->DrawEdges(lines, range);
 			renderer->DrawGUI(*gui, &GUI::DrawFrame);
 			const auto sec = timer.Mark(); // seconds counter

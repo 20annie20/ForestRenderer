@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "RandomAllocator.h"
 
- void RandomAllocator::Allocate(std::vector<Tree>& treeList, Terrain& terrain)
+ void RandomAllocator::Allocate(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList, Terrain& terrain)
 {
 	std::pair<int, int> mapSize = terrain.GetMapSize();
 

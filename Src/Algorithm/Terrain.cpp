@@ -10,6 +10,7 @@ void Terrain::LoadHeightMapFromFile(const char* filePath)
 	SDL_Surface* bitmap = Loader::GetSurfaceFromBitmap(filePath);
 	heightmapDTO = Heightmap(bitmap->w, bitmap->h);
 	heightmapDTO.SetMapBuffer(bitmap->pixels);
+	SDL_FreeSurface(bitmap);
 }
 
 void Terrain::GenerateHeight(int width, int length, int height)
@@ -28,11 +29,6 @@ void Terrain::GenerateHeight(int width, int length, int height)
 		}
 	}
 	
-}
-
-void Terrain::SaveHeight()
-{
-	// TODO
 }
 
 std::pair<int, int> Terrain::GetMapSize()
