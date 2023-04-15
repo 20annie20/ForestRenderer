@@ -91,6 +91,14 @@ void Engine::Run()
 				timeSinceLastGrow = 10;
 				lines.clear();
 				treeVector.clear();
+				if (allocatorFactory)
+				{
+					delete allocatorFactory;
+				}
+				if (allocator)
+				{
+					delete allocator;
+				}
 			}
 			renderer->DrawGUI(*gui, &GUI::DrawStartupFrame);
 		}
@@ -126,10 +134,6 @@ void Engine::Run()
 			renderer->DrawGUI(*gui, &GUI::DrawFrame);
 			const auto sec = timer.Mark(); // seconds counter
 			timeSinceLastGrow += sec;
-
-			char buf[32];
-			sprintf(buf, "%f\n", sec);
-			OutputDebugStringA(buf);
 		}
 		renderer->Present();
 	}

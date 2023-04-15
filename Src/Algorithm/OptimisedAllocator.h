@@ -10,7 +10,7 @@ Allocation points are to be used in growth simulation. */
 class OptimisedAllocator : public AllocatorAlgorithm
 {
 	std::unordered_map<Species_ID, Point> centroids;
-	void FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList);
+	void FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList, std::pair<int, int> mapSize);
 public:
 	/**
 	* \brief Asigns each tree a Point coordinate 

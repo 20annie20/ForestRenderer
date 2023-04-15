@@ -2,11 +2,11 @@
 #include "OptimisedAllocator.h"
 #include <math.h>
 
-void OptimisedAllocator::FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList)
+void OptimisedAllocator::FindCentroids(std::unordered_map<Species_ID, int>& tm, std::vector<Tree>& treeList, std::pair<int, int> mapSize)
 {
 	for (auto& i : tm)
 	{
-		int minX = INT_MAX, minZ = INT_MAX, maxX = INT_MIN, maxZ = INT_MIN;
+		int minX = mapSize.first, minZ = mapSize.first, maxX = 0, maxZ = 0;
 		for (int it = 0; it < i.second; it++)
 		{
 			if (treeList[it].GetLocation().x > maxX) 
@@ -29,6 +29,11 @@ void OptimisedAllocator::FindCentroids(std::unordered_map<Species_ID, int>& tm, 
 		std::random_device                  rand_dev;
 		std::mt19937                        generator(rand_dev());
 
+		if (maxZ < minZ)
+			maxZ = minZ;
+		if (maxX < minX)
+			maxX = minX;
+
 		std::uniform_int_distribution<int>  distrX(minX, maxX);
 		std::uniform_int_distribution<int>  distrZ(minZ, maxZ);
 		centroids[i.first] = Point(distrX(generator), 0, distrZ(generator));
@@ -43,13 +48,13 @@ void OptimisedAllocator::Allocate(std::unordered_map<Species_ID, int>& tm,std::v
 	const int range_fromX = 0;
 	const int range_toX = mapSize.first;
 
-	const int range_fromY = 0;
-	const int range_toY = mapSize.second;
+	const int range_fromZ = 0;
+	const int range_toZ = mapSize.second;
 
 	std::random_device                  rand_dev;
 	std::mt19937                        generator(rand_dev());
 	std::uniform_int_distribution<int>  distrX(range_fromX, range_toX);
-	std::uniform_int_distribution<int>  distrY(range_fromY, range_toY);
+	std::uniform_int_distribution<int>  distrY(range_fromZ, range_toZ);
 	for (auto& t : treeList)
 	{
 
@@ -59,7 +64,7 @@ void OptimisedAllocator::Allocate(std::unordered_map<Species_ID, int>& tm,std::v
 		t.SetLocation(p);
 	}
 
-	FindCentroids(tm, treeList);
+	FindCentroids(tm, treeList, mapSize);
 
 	float step = 10;
 	for(auto& t : treeList)
@@ -76,12 +81,18 @@ void OptimisedAllocator::Allocate(std::unordered_map<Species_ID, int>& tm,std::v
 			auto distance = sqrt(zDiff * zDiff + xDiff * xDiff);
 			auto xUnit = xDiff / distance;
 			auto zUnit = zDiff / distance;
+			if (xUnit < 1)
+				xUnit = 1;
+			if (xUnit < 1)
+				xUnit = 1;
 
 			int newX = t.GetLocation().x + xUnit * step;
 			int newZ = t.GetLocation().z + zUnit * step;
-			int newY = terrain.GetHeight(newX, newZ);
-
-			t.SetLocation(Point(newX, newY, newZ));
+			if (newX >= 0 && newX < range_toX && newZ >= 0 && newZ < range_toZ)
+			{
+				int newY = terrain.GetHeight(newX, newZ);
+				t.SetLocation(Point(newX, newY, newZ));
+			}
 		}
 	}
 }
